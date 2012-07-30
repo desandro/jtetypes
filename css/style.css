@@ -1,0 +1,15 @@
+body, input, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+body, textarea {
+  background: #303030;
+  color: white;
+}
+
+#the-textarea {
+  font-size: 24px;
+  border: none;
+  text-align: center;
+}
