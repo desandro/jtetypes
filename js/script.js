@@ -14,12 +14,30 @@
 
 var fontConfigs = {
   duke: {
-    familes: [ 'Duke', 'Duke Fill', 'Duke Shadow' ],
+    families: [ 'Duke', 'Duke Fill', 'Duke Shadow' ],
     urls: [ 'css/duke.css' ]
+  },
+  edmondsans: {
+    families: [ 'Edmondsans Regular', 'Edmondsans Medium', 'Edmondsans Bold' ],
+    urls: [ 'css/edmondsans.css' ]
   }
 };
 
 window.fontConfigs = fontConfigs;
+
+var loadFont = function( fontName ) {
+  WebFont.load({
+    custom: fontConfigs[ fontName ],
+    active: function() {
+      console.log('font active');
+    },
+    inactive: function() {
+      console.log('font inactive');
+    }
+  });
+};
+
+window.loadFont = loadFont;
 
 // var webFontsConfig
 
@@ -42,7 +60,7 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
     return;
   }
   console.log('WebFont should be ready');
-  loadFont('duke');
+  loadFont('edmondsans');
   // clearTimeout( timeout );
   // WebFont.load()
 };
@@ -50,25 +68,6 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
 var firstScript = document.getElementsByTagName('script')[0];
 firstScript.parentNode.insertBefore( webFontScript, firstScript );
 
-window.loadFont = function( fontName ) {
-  WebFont.load({
-    custom: fontConfigs[ fontName ],
-    active: function() {
-      console.log('font active');
-    },
-    inactive: function() {
-      console.log('font inactive');
-    },
-    loading: function() {
-      console.log('loading font right now');
-    },
-    fontactive: function(fontFamily, fontDescription) {
-      console.log( arguments );
-    },
-    fontinactive: function(fontFamily, fontDescription) {
-      console.log( arguments );
-    }
-  });
-};
+
 
 })( window, document );
