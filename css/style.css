@@ -12,9 +12,21 @@ body, input, textarea {
 body, textarea {
   background: #303030;
   color: white;
-  font-family: 'Edmondsans Medium', sans-serif;
+/*  font-family: 'Edmondsans Medium', sans-serif;*/
   font-size: 32px;
 }
+
+body.duke, .duke textarea { font-family: 'Duke'; }
+body.duke-shadow, .duke-shadow textarea { font-family: 'Duke Shadow'; }
+body.duke-fill, .duke-fill textarea { font-family: 'Duke Fill'; }
+body.edmondsans-regular, .edmondsans-regular textarea { font-family: 'Edmondsans Regular'; }
+body.edmondsans-medium, .edmondsans-medium textarea { font-family: 'Edmondsans Medium'; }
+body.edmondsans-bold, .edmondsans-bold textarea { font-family: 'Edmondsans Bold'; }
+body.lavanderia-delicate, .lavanderia-delicate textarea { font-family: 'Lavanderia Delicate'; }
+body.lavanderia-regular, .lavanderia-regular textarea { font-family: 'Lavanderia Regular'; }
+body.lavanderia-sturdy, .lavanderia-sturdy textarea { font-family: 'Lavanderia Sturdy'; }
+body.mission-script, .mission-script textarea { font-family: 'Mission Script'; }
+body.wisdom-script, .wisdom-script textarea { font-family: 'Wisdom Script'; }
 
 #the-textarea {
   border: none;

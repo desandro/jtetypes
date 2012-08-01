@@ -44,11 +44,10 @@ families:
 
 <ul id="font-selection" class="clearfix">
   {% for family in page.families %}
-    <li class="family {{ family.slug }}">
+    <li class="family {{ family.slug }}" data-family="{{ family.slug }}">
       <ul>
         {% for font in family.fonts %}
-          {% capture font_slug %}{{ font | downcase | replace:' ','-' }}{% endcapture %}
-          <li class="{{ font_slug }}"><a href="#!/in:{{ font_slug }}">{{ font }}</a></li>
+          <li class="{{ font | downcase | replace:' ','-' }}"><a href="#!/in:{{ font | replace:' ','-' }}" data-font="{{ font | downcase | replace:' ','-' }}">{{ font }}</a></li>
         {% endfor %}
       </ul>
     </li>

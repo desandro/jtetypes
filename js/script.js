@@ -4,40 +4,89 @@
 
 
 /*jshint asi: false, curly: true, devel: true, eqeqeq: true, forin: false, newcap: true, noempty: true, strict: true, undef: true, browser: true */
-/*global WebFont: false */
+/*global WebFont: false, jQuery: false */
 
-( function( window, document, undefined ) {
+( function( window, document, $, undefined ) {
 
 'use strict';
+
+var $body;
 
 // -------------------------- fonts -------------------------- //
 
 var fontConfigs = {
   duke: {
-    families: [ 'Duke', 'Duke Fill', 'Duke Shadow' ],
+    families: [
+      'Duke',
+      'Duke Fill',
+      'Duke Shadow'
+    ],
     urls: [ 'css/duke.css' ]
   },
   edmondsans: {
-    families: [ 'Edmondsans Regular', 'Edmondsans Medium', 'Edmondsans Bold' ],
+    families: [
+      'Edmondsans Regular',
+      'Edmondsans Medium',
+      'Edmondsans Bold'
+    ],
     urls: [ 'css/edmondsans.css' ]
+  },
+  lavanderia: {
+    families: [
+      'Lavanderia Delicate',
+      'Lavanderia Regular',
+      'Lavanderia Sturdy'
+    ],
+    urls: [ 'css/lavanderia.css' ]
+  },
+  'mission-script': {
+    families: [
+      'Mission Script'
+    ],
+    urls: [ 'css/mission-script.css' ]
+  },
+  'wisdom-script': {
+    families: [
+      'Wisdom Script'
+    ],
+    urls: [ 'css/wisdom-script.css' ]
   }
 };
 
 window.fontConfigs = fontConfigs;
 
-var loadFont = function( fontName ) {
+// -------------------------- load font -------------------------- //
+
+var loadedFamilies = [];
+
+var loadFamily = function( family, callback ) {
   WebFont.load({
-    custom: fontConfigs[ fontName ],
+    custom: fontConfigs[ family ],
     active: function() {
-      console.log('font active');
+      loadedFamilies.push( family );
+      if ( callback ) {
+        callback();
+      }
+      console.log( family + ' family active');
     },
     inactive: function() {
-      console.log('font inactive');
+      console.log( family + ' family inactive');
     }
   });
 };
 
-window.loadFont = loadFont;
+var selectedFont;
+
+function selectFont( font ) {
+  if ( selectedFont ) {
+    $body.removeClass( selectedFont );
+  }
+  $body.addClass( font );
+  selectedFont = font;
+  console.log('selected ' + font );
+}
+
+// window.loadFont = loadFont;
 
 // var webFontsConfig
 
@@ -60,7 +109,7 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
     return;
   }
   console.log('WebFont should be ready');
-  loadFont('edmondsans');
+  // loadFont('edmondsans');
   // clearTimeout( timeout );
   // WebFont.load()
 };
@@ -68,6 +117,29 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
 var firstScript = document.getElementsByTagName('script')[0];
 firstScript.parentNode.insertBefore( webFontScript, firstScript );
 
+// -------------------------- events -------------------------- //
 
+function onFontSelectionClick( event ) {
+  var $target = $( event.target );
+  var family = $target.parents('.family').attr('data-family');
+  var font = $target.attr('data-font');
+  var isFamilyLoaded = family in loadedFamilies;
+  if ( isFamilyLoaded ) {
+    selectFont( font );
+  } else {
+    loadFamily( family, function() {
+      selectFont( font );
+    });
+  }
+  console.log( family, font );
+}
 
-})( window, document );
+// -------------------------- doc ready -------------------------- //
+
+$( function() {
+  $body = $('body');
+  $('#font-selection').on( 'click', 'a', onFontSelectionClick );
+
+});
+
+})( window, document, jQuery );
