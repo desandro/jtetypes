@@ -10,7 +10,7 @@
 
 'use strict';
 
-var $body;
+var $body, $theTextarea;
 
 // -------------------------- fonts -------------------------- //
 
@@ -134,11 +134,39 @@ function onFontSelectionClick( event ) {
   console.log( family, font );
 }
 
+var changeTimeout;
+
+
+function onTextareaChange( event ) {
+
+  var debounced = function() {
+    onDebouncedTextareaChange( event );
+    changeTimeout = null;
+  };
+
+  if ( changeTimeout ) {
+    window.clearTimeout( changeTimeout );
+  }
+
+  changeTimeout = window.setTimeout( debounced, 250 );
+
+}
+
+function onDebouncedTextareaChange( event ) {
+  console.log('text area change');
+
+  $.bbq.pushState( '#!/' + $theTextarea.val() )
+}
+
+
 // -------------------------- doc ready -------------------------- //
 
 $( function() {
   $body = $('body');
   $('#font-selection').on( 'click', 'a', onFontSelectionClick );
+
+  $theTextarea = $('#the-textarea');
+  $theTextarea.on( 'keyup change', onTextareaChange );
 
 });
 
