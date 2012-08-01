@@ -1,0 +1,3 @@
+[submodule "modules/jquery-bbq"]
+	path = modules/jquery-bbq
+	url = https://github.com/cowboy/jquery-bbq.git
