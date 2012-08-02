@@ -13,6 +13,23 @@
 var $body, $theTextarea;
 var path = {}; //parts of the hashes
 
+// helper function
+function capitalize( str ) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// gets 'hello-my-name-is' returns 'Hello-My-Name-Is'
+function capitalizeHyphenated( str ) {
+  var words = str.split('-');
+  var cappedWords = [];
+  var cappedWord;
+  for ( var i=0, len = words.length; i < len; i++ ) {
+    cappedWord = capitalize( words[i] );
+    cappedWords.push( cappedWord );
+  }
+  return cappedWords.join('-');
+}
+
 // -------------------------- fonts -------------------------- //
 
 var fontConfigs = {
@@ -55,8 +72,7 @@ var fontConfigs = {
 };
 
 
-// build valid fonts and parent family
-var validFonts = [];
+// build a hash of familes of fonts
 var fontFamilies = {};
 var fonts, font;
 for ( var family in fontConfigs ) {
@@ -64,7 +80,6 @@ for ( var family in fontConfigs ) {
   for ( var i=0, len = fonts.length; i < len; i++ ) {
     font = fonts[i].replace( /\s/gi, '-' ).toLowerCase();
     fontFamilies[ font ] = family;
-    validFonts.push( font );
   }
 }
 
@@ -91,11 +106,11 @@ var loadFamily = function( family, callback ) {
 
 function selectFont( font ) {
   console.log( 'selecting ', font );
-  // throw out invalid font
-  if ( validFonts.indexOf( font ) === -1 ) {
+  // don't change if invalid font
+  if ( !( font in fontFamilies ) ) {
     return;
   }
-
+  // path.font = font;
   var family = fontFamilies[ font ];
 
   if ( fontConfigs[ family ].isLoaded ) {
@@ -156,14 +171,16 @@ firstScript.parentNode.insertBefore( webFontScript, firstScript );
 
 function onFontSelectionClick( event ) {
   var $target = $( event.target );
-  var font = $target.attr('data-font');
+  path.font = $target.attr('data-font');
+  pushIt();
+  event.preventDefault();
 }
 
 var changeTimeout;
 
 
 function onTextareaChange( event ) {
-
+  // debounce this so it doesn't fire every millisecond
   var debounced = function() {
     onDebouncedTextareaChange( event );
     changeTimeout = null;
@@ -173,7 +190,7 @@ function onTextareaChange( event ) {
     window.clearTimeout( changeTimeout );
   }
 
-  changeTimeout = window.setTimeout( debounced, 250 );
+  changeTimeout = window.setTimeout( debounced, 500 );
 
 }
 
@@ -204,7 +221,7 @@ function pushIt() {
     hash += path.text.replace( /\s/gi, '-' ) + '/';
   }
   if ( path.font ) {
-    hash += 'in:' + path.font + '/';
+    hash += 'in:' + capitalizeHyphenated( path.font ) + '/';
   }
   if ( path.size ) {
     hash += 'at:' + path.size + '/';
@@ -216,15 +233,23 @@ function pushIt() {
 function getHashPath( hash ) {
   var hashPath = {};
   var parts = hash.split('/');
-  console.log( parts );
   var part, font, size, text;
+  var textIsSet;
   for ( var i=0, len = parts.length; i < len; i++ ) {
     part = parts[i];
     if ( part === '' || part === '#!' ) {
+      // disregard hashbang or empty
       continue;
     } else if ( part.indexOf('in:') === 0 ) {
       font = part.replace( 'in:', '' ).toLowerCase();
       selectFont( font );
+    } else if ( part.indexOf('at:') === 0 ) {
+      var foo = 'set font size';
+    } else if ( !textIsSet ) {
+      // set text area value
+      text = part.replace( /\-/gi, ' ' );
+      $theTextarea.val( text );
+      textIsSet = true;
     }
   }
 }
