@@ -3,14 +3,15 @@
 **/
 
 
-/*jshint asi: false, curly: true, devel: true, eqeqeq: true, forin: false, newcap: true, noempty: true, strict: true, undef: true, browser: true */
+/*jshint asi: true, curly: true, devel: true, eqeqeq: true, forin: false, newcap: true, noempty: true, strict: true, undef: true, browser: true */
 /*global WebFont: false, jQuery: false */
 
-( function( window, document, $, undefined ) {
+( function( window, document, location, $, undefined ) {
 
 'use strict';
 
 var $body, $theTextarea;
+var path = {}; //parts of the hashes
 
 // -------------------------- fonts -------------------------- //
 
@@ -53,17 +54,32 @@ var fontConfigs = {
   }
 };
 
+
+// build valid fonts
+var validFonts = [];
+var fonts, font;
+for ( var family in fontConfigs ) {
+  fonts = fontConfigs[ family ].families;
+  for ( var i=0, len = fonts.length; i < len; i++ ) {
+    font = fonts[i].replace( /\s/gi, '-' ).toLowerCase();
+    console.log( font );
+    validFonts.push( font );
+  }
+}
+
+console.log( validFonts );
+
 window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
-var loadedFamilies = [];
+var loadedFamilies = {};
 
-var loadFamily = function( family, callback ) {
+var loadFamily = function( family, callback ) { 
   WebFont.load({
     custom: fontConfigs[ family ],
     active: function() {
-      loadedFamilies.push( family );
+      loadedFamilies[ family ] = true;
       if ( callback ) {
         callback();
       }
@@ -78,6 +94,11 @@ var loadFamily = function( family, callback ) {
 var selectedFont;
 
 function selectFont( font ) {
+  console.log( 'selecting ', font );
+  // throw out invalid font
+  if ( validFonts.indexOf( font ) === -1 ) {
+    return;
+  }
   if ( selectedFont ) {
     $body.removeClass( selectedFont );
   }
@@ -124,6 +145,7 @@ function onFontSelectionClick( event ) {
   var family = $target.parents('.family').attr('data-family');
   var font = $target.attr('data-font');
   var isFamilyLoaded = family in loadedFamilies;
+  // console.log( 'selected', family, font );
   if ( isFamilyLoaded ) {
     selectFont( font );
   } else {
@@ -131,7 +153,6 @@ function onFontSelectionClick( event ) {
       selectFont( font );
     });
   }
-  console.log( family, font );
 }
 
 var changeTimeout;
@@ -154,10 +175,55 @@ function onTextareaChange( event ) {
 
 function onDebouncedTextareaChange( event ) {
   console.log('text area change');
-
-  $.bbq.pushState( '#!/' + $theTextarea.val() )
+  path.text = $theTextarea.val();
+  pushIt();
 }
 
+
+function onHashchange( event ) {
+  console.log( 'hashchange' );
+  // reset
+  var hashPath = getHashPath( location.hash );
+  wasPushed = false;
+  // parse path
+}
+
+// -------------------------- pushIt -------------------------- //
+
+var wasPushed = false;
+
+// push it real good
+function pushIt() {
+  // set hashbang
+  var hash = '#!/';
+  if ( path.text ) {
+    hash += path.text.replace( /\s/gi, '-' ) + '/';
+  }
+  if ( path.font ) {
+    hash += 'in:' + path.font + '/';
+  }
+  if ( path.size ) {
+    hash += 'at:' + path.size + '/';
+  }
+  wasPushed = true;
+  $.bbq.pushState( hash );
+}
+
+function getHashPath( hash ) {
+  var hashPath = {};
+  var parts = hash.split('/');
+  console.log( parts );
+  var part, font, size, text;
+  for ( var i=0, len = parts.length; i < len; i++ ) {
+    part = parts[i];
+    if ( part === '' || part === '#!' ) {
+      return;
+    } else if ( part.indexOf('in:') === 0 ) {
+      font = part.replace( 'in:', '' ).toLowerCase();
+      selectFont( font );
+    }
+  }
+}
 
 // -------------------------- doc ready -------------------------- //
 
@@ -168,6 +234,8 @@ $( function() {
   $theTextarea = $('#the-textarea');
   $theTextarea.on( 'keyup change', onTextareaChange );
 
+  $( window ).on( 'hashchange', onHashchange );
+
 });
 
-})( window, document, jQuery );
+})( window, document, location, jQuery );
