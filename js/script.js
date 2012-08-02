@@ -55,31 +55,29 @@ var fontConfigs = {
 };
 
 
-// build valid fonts
+// build valid fonts and parent family
 var validFonts = [];
+var fontFamilies = {};
 var fonts, font;
 for ( var family in fontConfigs ) {
   fonts = fontConfigs[ family ].families;
   for ( var i=0, len = fonts.length; i < len; i++ ) {
     font = fonts[i].replace( /\s/gi, '-' ).toLowerCase();
-    console.log( font );
+    fontFamilies[ font ] = family;
     validFonts.push( font );
   }
 }
-
-console.log( validFonts );
 
 window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
-var loadedFamilies = {};
-
 var loadFamily = function( family, callback ) { 
   WebFont.load({
     custom: fontConfigs[ family ],
     active: function() {
-      loadedFamilies[ family ] = true;
+      // keep track of loaded family
+      fontConfigs[ family ].isLoaded = true;
       if ( callback ) {
         callback();
       }
@@ -91,20 +89,36 @@ var loadFamily = function( family, callback ) {
   });
 };
 
-var selectedFont;
-
 function selectFont( font ) {
   console.log( 'selecting ', font );
   // throw out invalid font
   if ( validFonts.indexOf( font ) === -1 ) {
     return;
   }
-  if ( selectedFont ) {
-    $body.removeClass( selectedFont );
+
+  var family = fontFamilies[ font ];
+
+  if ( fontConfigs[ family ].isLoaded ) {
+    // family already loaded, select the font
+    activateFont( font );
+  } else {
+    // family not loaded, load the family, then select font
+    loadFamily( family, function() {
+      activateFont( font );
+    });
+  }
+}
+
+var activeFont;
+
+function activateFont( font ) {
+  if ( activeFont ) {
+    $body.removeClass( activeFont );
   }
   $body.addClass( font );
-  selectedFont = font;
-  console.log('selected ' + font );
+  activeFont = font;
+  console.log('activated ' + font );
+
 }
 
 // window.loadFont = loadFont;
@@ -142,17 +156,7 @@ firstScript.parentNode.insertBefore( webFontScript, firstScript );
 
 function onFontSelectionClick( event ) {
   var $target = $( event.target );
-  var family = $target.parents('.family').attr('data-family');
   var font = $target.attr('data-font');
-  var isFamilyLoaded = family in loadedFamilies;
-  // console.log( 'selected', family, font );
-  if ( isFamilyLoaded ) {
-    selectFont( font );
-  } else {
-    loadFamily( family, function() {
-      selectFont( font );
-    });
-  }
 }
 
 var changeTimeout;
@@ -217,7 +221,7 @@ function getHashPath( hash ) {
   for ( var i=0, len = parts.length; i < len; i++ ) {
     part = parts[i];
     if ( part === '' || part === '#!' ) {
-      return;
+      continue;
     } else if ( part.indexOf('in:') === 0 ) {
       font = part.replace( 'in:', '' ).toLowerCase();
       selectFont( font );
