@@ -36,25 +36,38 @@ families:
 </head>
 <body>
 
-  <h1>JTE Types</h1>
+  <h1>
+    Say it
+    with fonts from
+    James T. Edmondson
+  </h1>
 
   <textarea id="the-textarea">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. El llamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</textarea>
 
 
-
-<ul id="font-selection" class="clearfix">
-  {% for family in page.families %}
-    <li class="family {{ family.slug }}" data-family="{{ family.slug }}">
-      <ul>
-        {% for font in family.fonts %}
-          <li class="{{ font | downcase | replace:' ','-' }}"><a href="#!/in:{{ font | replace:' ','-' }}" data-font="{{ font | downcase | replace:' ','-' }}">{{ font }}</a></li>
-        {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div id="controls">
+  <div class="clearfix">
+    <p id="purchase">
+      Purchase
+    </p>
+    <div id="font-sizer">
+      <label for="font-size">Font size</label>
+      <input id="font-size" type="range">
+      <output></output>
+    </div>
+  </div>
+  <ul id="font-selection" class="clearfix">
+    {% for family in page.families %}
+      <li class="family {{ family.slug }}" data-family="{{ family.slug }}">
+        <ul>
+          {% for font in family.fonts %}
+            <li class="{{ font | downcase | replace:' ','-' }}"><a href="#!/in:{{ font | replace:' ','-' }}" data-font="{{ font | downcase | replace:' ','-' }}">{{ font }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
 
 <script src="js/jquery.min.js"></script>
 <script src="modules/jquery-bbq/jquery.ba-bbq.min.js"></script>
