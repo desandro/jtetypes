@@ -218,7 +218,7 @@ function pushIt() {
   // set hashbang
   var hash = '#!/';
   if ( path.text ) {
-    hash += path.text.replace( /\s/gi, '-' ) + '/';
+    hash += encode( path.text ) + '/';
   }
   if ( path.font ) {
     hash += 'in:' + capitalizeHyphenated( path.font ) + '/';
@@ -228,6 +228,19 @@ function pushIt() {
   }
   wasPushed = true;
   $.bbq.pushState( hash );
+}
+
+function encode( text ) {
+  return text.replace( /\-/gi, '\\-' ) // dash to slash-dash
+    .replace( / /g, '-' ) // space to dash
+    .replace( /\n/g, '\\n' ) // break to '\n'
+}
+
+function decode( text ) {
+  return text.replace( /\\\-/gi, '_dash_' ) // slash-dash to _dash_
+    .replace( /\-/g, ' ' ) // - to space
+    .replace( /_dash_/g, '-' ) // _dash_ to -
+    .replace( /\\n/g, "\n" ); // \n to line break
 }
 
 function getHashPath( hash ) {
@@ -247,7 +260,7 @@ function getHashPath( hash ) {
       var foo = 'set font size';
     } else if ( !textIsSet ) {
       // set text area value
-      text = part.replace( /\-/gi, ' ' );
+      text = decode( part );
       $theTextarea.val( text );
       textIsSet = true;
     }
