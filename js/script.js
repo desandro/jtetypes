@@ -234,13 +234,15 @@ function encode( text ) {
   return text.replace( /\-/gi, '\\-' ) // dash to slash-dash
     .replace( / /g, '-' ) // space to dash
     .replace( /\n/g, '\\n' ) // break to '\n'
+    .replace( /#/g, '\\H' ) // # to \H
 }
 
 function decode( text ) {
   return text.replace( /\\\-/gi, '_dash_' ) // slash-dash to _dash_
     .replace( /\-/g, ' ' ) // - to space
     .replace( /_dash_/g, '-' ) // _dash_ to -
-    .replace( /\\n/g, "\n" ); // \n to line break
+    .replace( /\\n/g, "\n" ) // \n to line break
+    .replace( /\\H/g, '#' ); // \H to #
 }
 
 function getHashPath( hash ) {
