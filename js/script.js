@@ -216,12 +216,8 @@ function onSlidechange( event, ui ) {
   setFontSize( ui.value );
   path.size = ui.value + 'px';
   debouncedPushIt();
-
 }
 
-var debouncedPushIt = debounce( function() {
-  pushIt();
-});
 
 
 // -------------------------- pushIt -------------------------- //
@@ -244,6 +240,13 @@ function pushIt() {
   wasPushed = true;
   $.bbq.pushState( hash );
 }
+
+var debouncedPushIt = debounce( function() {
+  pushIt();
+});
+
+
+// -------------------------- hash path -------------------------- //
 
 function encode( text ) {
   return text.replace( /\-/gi, '\\-' ) // dash to slash-dash
@@ -274,7 +277,7 @@ function getHashPath( hash ) {
       font = part.replace( 'in:', '' ).toLowerCase();
       selectFont( font );
     } else if ( part.indexOf('at:') === 0 ) {
-      var foo = 'set font size';
+      setFontSize( part.replace( 'at:', '' ) );
     } else if ( !textIsSet ) {
       // set text area value
       text = decode( part );
