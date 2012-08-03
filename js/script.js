@@ -41,7 +41,7 @@ var debounce = function ( func, threshold ) {
     function delayed () {
       func();
       timeout = null;
-    };
+    }
     if ( timeout ) {
       clearTimeout( timeout );
     }
@@ -204,15 +204,23 @@ function onTextareaChange( event ) {
   debouncedPushIt();
 }
 
+var isHashChanged;
+
 function onHashchange( event ) {
   console.log( 'hashchange' );
   // reset
+  isHashChanged = true;
   var hashPath = getHashPath( location.hash );
+  isHashChanged = false;
   wasPushed = false;
   // parse path
 }
 
 function onSlidechange( event, ui ) {
+  // disregard slidechange from hash change
+  if ( isHashChanged ) {
+    return;
+  }
   setFontSize( ui.value );
   path.size = ui.value + 'px';
   debouncedPushIt();
@@ -277,7 +285,9 @@ function getHashPath( hash ) {
       font = part.replace( 'in:', '' ).toLowerCase();
       selectFont( font );
     } else if ( part.indexOf('at:') === 0 ) {
-      setFontSize( part.replace( 'at:', '' ) );
+      size = parseInt( part.replace( 'at:', '' ), 10 );
+      setFontSize( size );
+      fontSizeSlider.slider( 'value', size );
     } else if ( !textIsSet ) {
       // set text area value
       text = decode( part );
@@ -288,7 +298,7 @@ function getHashPath( hash ) {
 }
 
 function setFontSize( size ) {
-  size = parseInt( size ) + 'px';
+  size = parseInt( size, 10 ) + 'px';
   $theTextarea.css({
     fontSize: size
   });
@@ -298,6 +308,7 @@ function setFontSize( size ) {
 // -------------------------- doc ready -------------------------- //
 
 var $fontSizeOutput;
+var fontSizeSlider;
 
 $( function() {
   $body = $('body');
@@ -311,7 +322,7 @@ $( function() {
   $fontSizeOutput = $('#font-sizer .output');
 
   // set up slider
-  $('#font-size').slider({
+  fontSizeSlider = $('#font-size').slider({
     min: 14,
     max: 320,
     slide: onSlidechange,
