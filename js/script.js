@@ -30,6 +30,25 @@ function capitalizeHyphenated( str ) {
   return cappedWords.join('-');
 }
 
+
+
+// variation on...
+// http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+var debounce = function ( func, threshold ) {
+
+  var timeout;
+  return function debounced () {
+    function delayed () {
+      func();
+      timeout = null;
+    };
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    timeout = setTimeout( delayed, threshold || 500 );
+  };
+}
+
 // -------------------------- fonts -------------------------- //
 
 var fontConfigs = {
@@ -87,7 +106,7 @@ window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
-var loadFamily = function( family, callback ) { 
+var loadFamily = function( family, callback ) {
   WebFont.load({
     custom: fontConfigs[ family ],
     active: function() {
@@ -181,26 +200,9 @@ var changeTimeout;
 
 
 function onTextareaChange( event ) {
-  // debounce this so it doesn't fire every millisecond
-  var debounced = function() {
-    onDebouncedTextareaChange( event );
-    changeTimeout = null;
-  };
-
-  if ( changeTimeout ) {
-    window.clearTimeout( changeTimeout );
-  }
-
-  changeTimeout = window.setTimeout( debounced, 500 );
-
-}
-
-function onDebouncedTextareaChange( event ) {
-  console.log('text area change');
   path.text = $theTextarea.val();
-  pushIt();
+  debouncedPushIt();
 }
-
 
 function onHashchange( event ) {
   console.log( 'hashchange' );
@@ -211,12 +213,16 @@ function onHashchange( event ) {
 }
 
 function onSlidechange( event, ui ) {
-  var size = ui.value + 'px';
-  $theTextarea.css({
-    fontSize: size
-  });
-  $fontSizeOutput.text( size );
+  setFontSize( ui.value );
+  path.size = ui.value + 'px';
+  debouncedPushIt();
+
 }
+
+var debouncedPushIt = debounce( function() {
+  pushIt();
+});
+
 
 // -------------------------- pushIt -------------------------- //
 
@@ -276,6 +282,14 @@ function getHashPath( hash ) {
       textIsSet = true;
     }
   }
+}
+
+function setFontSize( size ) {
+  size = parseInt( size ) + 'px';
+  $theTextarea.css({
+    fontSize: size
+  });
+  $fontSizeOutput.text( size );
 }
 
 // -------------------------- doc ready -------------------------- //
