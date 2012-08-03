@@ -210,6 +210,14 @@ function onHashchange( event ) {
   // parse path
 }
 
+function onSlidechange( event, ui ) {
+  var size = ui.value + 'px';
+  $theTextarea.css({
+    fontSize: size
+  });
+  $fontSizeOutput.text( size );
+}
+
 // -------------------------- pushIt -------------------------- //
 
 var wasPushed = false;
@@ -272,6 +280,8 @@ function getHashPath( hash ) {
 
 // -------------------------- doc ready -------------------------- //
 
+var $fontSizeOutput;
+
 $( function() {
   $body = $('body');
   $('#font-selection').on( 'click', 'a', onFontSelectionClick );
@@ -280,6 +290,16 @@ $( function() {
   $theTextarea.on( 'keyup change', onTextareaChange );
 
   $( window ).on( 'hashchange', onHashchange );
+
+  $fontSizeOutput = $('#font-sizer .output');
+
+  // set up slider
+  $('#font-size').slider({
+    min: 14,
+    max: 320,
+    slide: onSlidechange,
+    change: onSlidechange
+  });
 
 });
 
