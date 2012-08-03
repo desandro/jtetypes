@@ -12,20 +12,22 @@ body, input, textarea {
 body, textarea {
   background: #303030;
   color: white;
-/*  font-family: 'Edmondsans Medium', sans-serif;*/
+  font-family: 'Edmondsans Medium', sans-serif;
 }
 
-body.duke, .duke textarea { font-family: 'Duke'; }
-body.duke-shadow, .duke-shadow textarea { font-family: 'Duke Shadow'; }
-body.duke-fill, .duke-fill textarea { font-family: 'Duke Fill'; }
-body.edmondsans-regular, .edmondsans-regular textarea { font-family: 'Edmondsans Regular'; }
-body.edmondsans-medium, .edmondsans-medium textarea { font-family: 'Edmondsans Medium'; }
-body.edmondsans-bold, .edmondsans-bold textarea { font-family: 'Edmondsans Bold'; }
-body.lavanderia-delicate, .lavanderia-delicate textarea { font-family: 'Lavanderia Delicate'; }
-body.lavanderia-regular, .lavanderia-regular textarea { font-family: 'Lavanderia Regular'; }
-body.lavanderia-sturdy, .lavanderia-sturdy textarea { font-family: 'Lavanderia Sturdy'; }
-body.mission-script, .mission-script textarea { font-family: 'Mission Script'; }
-body.wisdom-script, .wisdom-script textarea { font-family: 'Wisdom Script'; }
+.duke textarea { font-family: 'Duke'; }
+.duke-shadow textarea { font-family: 'Duke Shadow'; }
+.duke-fill textarea { font-family: 'Duke Fill'; }
+.edmondsans-regular textarea { font-family: 'Edmondsans Regular'; }
+.edmondsans-medium textarea { font-family: 'Edmondsans Medium'; }
+.edmondsans-bold textarea { font-family: 'Edmondsans Bold'; }
+.lavanderia-delicate textarea { font-family: 'Lavanderia Delicate'; }
+.lavanderia-regular textarea { font-family: 'Lavanderia Regular'; }
+.lavanderia-sturdy textarea { font-family: 'Lavanderia Sturdy'; }
+.mission-script textarea { font-family: 'Mission Script'; }
+.wisdom-script textarea { font-family: 'Wisdom Script'; }
+
+
 
 #the-textarea {
   border: none;

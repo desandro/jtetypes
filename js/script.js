@@ -159,7 +159,8 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
     return;
   }
   console.log('WebFont should be ready');
-  // loadFont('edmondsans');
+  // load edmondsans family first
+  loadFamily('edmondsans');
   // clearTimeout( timeout );
   // WebFont.load()
 };
