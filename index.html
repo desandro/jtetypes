@@ -1,24 +1,33 @@
 ---
 families:
   - slug: duke
+    acquire: '<a href="http://www.losttype.com/font/?name=duke">Purchase Duke at Lost Type Co-Op</a>'
     fonts:
       - Duke
       - Duke Fill
       - Duke Shadow
+
   - slug: edmondsans
+    acquire: '<a href="http://www.losttype.com/font/?name=edmondsans">Purchase Edmondsans at Lost Type Co-Op</a>'
     fonts:
       - Edmondsans Regular
       - Edmondsans Medium
       - Edmondsans Bold
+
   - slug: lavanderia
+    acquire: '<a href="http://www.losttype.com/font/?name=lavanderia">Purchase Lavandria at Lost Type Co-Op</a>'
     fonts:
       - Lavanderia Delicate
       - Lavanderia Regular
       - Lavanderia Sturdy
+
   - slug: mission-script
+    acquire: '<a href="http://www.losttype.com/font/?name=mission_script">Purchase Mission Script at Lost Type Co-Op</a>'
     fonts:
       - Mission Script
+
   - slug: wisdom-script
+    acquire: '<a href="http://www.losttype.com/font/?name=wisdom%20script">Purchase Wisdom Script at Lost Type Co-Op</a>'
     fonts:
       - Wisdom Script
 
@@ -40,15 +49,21 @@ families:
 
 <div id="controls">
   <div class="clearfix">
-    <p id="purchase">
-      Purchase
-    </p>
+
+    <div id="acquire">
+      {% for family in page.families %}
+        <p class="{{ family.slug }}">{{ family.acquire }}</p>
+      {% endfor %}
+    </div>
+
     <div id="font-sizer">
       <label for="font-size">Font size</label>
       <div id="font-size"></div>
       <span class="output"></span>
     </div>
+
   </div>
+
   <ul id="font-selection" class="clearfix">
     {% for family in page.families %}
       <li class="family {{ family.slug }}" data-family="{{ family.slug }}">

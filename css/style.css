@@ -25,6 +25,14 @@ body, textarea {
   font-family: 'Edmondsans Medium', sans-serif;
 }
 
+a {
+  color: #FE8;
+  text-decoration: none;
+}
+a:hover { color: red; }
+
+/* ----------------- text area ----------------- */
+
 /* font in text area */
 .duke textarea { font-family: 'Duke'; }
 .duke-shadow textarea { font-family: 'Duke Shadow'; }
@@ -51,6 +59,17 @@ body, textarea {
 }
 
 #the-textarea:hover, #the-textarea:focus { border-color: white; }
+
+/* ----------------- acquire ----------------- */
+
+#acquire p {
+  display: none;
+  text-align: center;
+}
+
+#acquire p.is-active { display: block; }
+
+/* ----------------- font selection ----------------- */
 
 #font-selection {
   font-size: 16px;
