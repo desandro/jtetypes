@@ -158,6 +158,9 @@ function activateFont( font ) {
   if ( font === activeFont ) {
     return;
   }
+
+  var family = fontFamilies[ font ];
+
   if ( activeFont ) {
     $body.removeClass( activeFont );
     $fontSelection.find('.is-active').removeClass('is-active');
@@ -168,6 +171,8 @@ function activateFont( font ) {
   $acquire.find( '.' + family ).addClass('is-active');
   activeFont = font;
   console.log('activated ' + font );
+  path.font = font;
+  pushIt();
 
 }
 
@@ -199,8 +204,8 @@ firstScript.parentNode.insertBefore( webFontScript, firstScript );
 
 function onFontSelectionClick( event ) {
   var $target = $( event.target );
-  path.font = $target.attr('data-font');
-  pushIt();
+  var font = $target.attr('data-font');
+  selectFont( font );
   event.preventDefault();
 }
 
@@ -218,7 +223,9 @@ function onHashchange( event ) {
   console.log( 'hashchange' );
   // reset
   isHashChanged = true;
-  var hashPath = getHashPath( location.hash );
+  if ( !wasPushed ) {
+    var hashPath = getHashPath( location.hash );
+  }
   isHashChanged = false;
   wasPushed = false;
   // parse path
@@ -342,7 +349,7 @@ $( function() {
 
   // set up slider
   fontSizeSlider = $('#font-size').slider({
-    min: 14,
+    min: 32,
     max: 320,
     value: parseInt( initialFontSize, 10 ),
     slide: onSlidechange,
