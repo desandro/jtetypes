@@ -160,8 +160,10 @@ function activateFont( font ) {
   }
   if ( activeFont ) {
     $body.removeClass( activeFont );
+    $fontSelection.find('.is-active').removeClass('is-active');
   }
   $body.addClass( font );
+  $fontSelection.find('li.' + font ).not('.family').addClass('is-active');
   activeFont = font;
   console.log('activated ' + font );
 
@@ -321,12 +323,12 @@ function setFontSize( size ) {
 
 // -------------------------- doc ready -------------------------- //
 
-var $fontSizeOutput;
+var $fontSizeOutput, $fontSelection;
 var fontSizeSlider;
 
 $( function() {
   $body = $('body');
-  $('#font-selection').on( 'click', 'a', onFontSelectionClick );
+  $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
 
   $theTextarea = $('#the-textarea');
   $theTextarea.on( 'keyup change', onTextareaChange );

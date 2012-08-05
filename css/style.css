@@ -25,6 +25,7 @@ body, textarea {
   font-family: 'Edmondsans Medium', sans-serif;
 }
 
+/* font in text area */
 .duke textarea { font-family: 'Duke'; }
 .duke-shadow textarea { font-family: 'Duke Shadow'; }
 .duke-fill textarea { font-family: 'Duke Fill'; }
@@ -36,21 +37,6 @@ body, textarea {
 .lavanderia-sturdy textarea { font-family: 'Lavanderia Sturdy'; }
 .mission-script textarea { font-family: 'Mission Script'; }
 .wisdom-script textarea { font-family: 'Wisdom Script'; }
-
-.duke #font-selection li li.duke a,
-.duke-shadow #font-selection li.duke-shadow a,
-.duke-fill #font-selection li.duke-fill a,
-.edmondsans-regular #font-selection li.edmondsans-regular a,
-.edmondsans-medium #font-selection li.edmondsans-medium a,
-.edmondsans-bold #font-selection li.edmondsans-bold a,
-.lavanderia-delicate #font-selection li.lavanderia-delicate a,
-.lavanderia-regular #font-selection li.lavanderia-regular a,
-.lavanderia-sturdy #font-selection li.lavanderia-sturdy a,
-.mission-script #font-selection li.mission-script a,
-.wisdom-script #font-selection li.wisdom-script a {
-  background: #F00;
-  color: white;
-}
 
 
 #the-textarea {
@@ -106,6 +92,11 @@ body, textarea {
   background: white;
   border-color: white;
   color: #303030;
+}
+
+#font-selection .is-active a {
+  background: red;
+  color: white;
 }
 
 
