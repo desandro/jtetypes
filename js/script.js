@@ -11,7 +11,7 @@
 'use strict';
 
 var $body, $theTextarea;
-var path = {}; //parts of the hashes
+var path = {}; // text, fontsize, font, style
 
 // helper function
 function capitalize( str ) {
@@ -107,6 +107,10 @@ window.fontConfigs = fontConfigs;
 // -------------------------- load font -------------------------- //
 
 var loadFamily = function( family, callback ) {
+  // don't proceed if WebFont isn't ready
+  if ( !window.WebFont ) {
+    return;
+  }
   WebFont.load({
     custom: fontConfigs[ family ],
     active: function() {
@@ -179,7 +183,9 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   }
   console.log('WebFont should be ready');
   // load edmondsans family first
-  loadFamily('edmondsans');
+  // loadFamily('edmondsans');
+  // $( window ).trigger( 'hashchange' );
+  selectFont( path.font );
   // clearTimeout( timeout );
   // WebFont.load()
 };
@@ -271,28 +277,38 @@ function decode( text ) {
     .replace( /\\H/g, '#' ); // \H to #
 }
 
+var rePathPrefix = /[\w\-]+:/;
+
 function getHashPath( hash ) {
   var hashPath = {};
   var parts = hash.split('/');
-  var part, font, size, text;
-  var textIsSet;
+  var textIsSet = false;
+  var part, prefix, setting;
+
   for ( var i=0, len = parts.length; i < len; i++ ) {
     part = parts[i];
-    if ( part === '' || part === '#!' ) {
-      // disregard hashbang or empty
-      continue;
-    } else if ( part.indexOf('in:') === 0 ) {
-      font = part.replace( 'in:', '' ).toLowerCase();
-      selectFont( font );
-    } else if ( part.indexOf('at:') === 0 ) {
-      size = parseInt( part.replace( 'at:', '' ), 10 );
-      setFontSize( size );
-      fontSizeSlider.slider( 'value', size );
-    } else if ( !textIsSet ) {
-      // set text area value
-      text = decode( part );
-      $theTextarea.val( text );
-      textIsSet = true;
+    // get in:, at:, size:
+    prefix = rePathPrefix.exec( part );
+    prefix = prefix && prefix[0];
+    // get stuff after : if its there
+    setting = prefix ? part.replace( prefix, '' ) : part;
+    switch ( prefix ) {
+      case 'in:' :
+        path.font = setting.toLowerCase();
+        selectFont( path.font );
+        break;
+      case 'at:' :
+        path.size = parseInt( setting, 10 );
+        setFontSize( path.size );
+        fontSizeSlider.slider( 'value', path.size );
+        break;
+      default :
+        // set text area value
+        if ( !textIsSet && part !== '' && part !== '#!' ) {
+          path.text = decode( part );
+          $theTextarea.val( path.text );
+          textIsSet = true;
+        }
     }
   }
 }
@@ -317,8 +333,6 @@ $( function() {
   $theTextarea = $('#the-textarea');
   $theTextarea.on( 'keyup change', onTextareaChange );
 
-  $( window ).on( 'hashchange', onHashchange );
-
   var initialFontSize = $theTextarea.css('font-size');
 
   $fontSizeOutput = $('#font-sizer .output').text( initialFontSize );
@@ -331,6 +345,9 @@ $( function() {
     slide: onSlidechange,
     change: onSlidechange
   });
+
+  // trigger hash change to capture initial settings
+  $( window ).on( 'hashchange', onHashchange ).trigger('hashchange');
 
 });
 
