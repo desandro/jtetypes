@@ -319,12 +319,15 @@ $( function() {
 
   $( window ).on( 'hashchange', onHashchange );
 
-  $fontSizeOutput = $('#font-sizer .output');
+  var initialFontSize = $theTextarea.css('font-size');
+
+  $fontSizeOutput = $('#font-sizer .output').text( initialFontSize );
 
   // set up slider
   fontSizeSlider = $('#font-size').slider({
     min: 14,
     max: 320,
+    value: parseInt( initialFontSize, 10 ),
     slide: onSlidechange,
     change: onSlidechange
   });

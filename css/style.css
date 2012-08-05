@@ -9,10 +9,14 @@ body, input, textarea {
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   padding: 10px;
   padding-bottom: 200px;
-  min-height: 100%;
+/*  min-height: 100%;*/
 }
 
 body, textarea {
