@@ -292,7 +292,7 @@ function getHashPath( hash ) {
   var hashPath = {};
   var parts = hash.split('/');
   var textIsSet = false;
-  var part, prefix, setting;
+  var part, prefix, setting, size;
 
   for ( var i=0, len = parts.length; i < len; i++ ) {
     part = parts[i];
@@ -307,9 +307,10 @@ function getHashPath( hash ) {
         selectFont( path.font );
         break;
       case 'at:' :
-        path.size = parseInt( setting, 10 );
-        setFontSize( path.size );
-        fontSizeSlider.slider( 'value', path.size );
+        size = parseInt( setting, 10 )
+        path.size = setting;
+        setFontSize( size );
+        fontSizeSlider.slider( 'value', size );
         break;
       default :
         // set text area value
