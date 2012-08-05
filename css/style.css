@@ -37,6 +37,20 @@ body, textarea {
 .mission-script textarea { font-family: 'Mission Script'; }
 .wisdom-script textarea { font-family: 'Wisdom Script'; }
 
+.duke #font-selection li li.duke a,
+.duke-shadow #font-selection li.duke-shadow a,
+.duke-fill #font-selection li.duke-fill a,
+.edmondsans-regular #font-selection li.edmondsans-regular a,
+.edmondsans-medium #font-selection li.edmondsans-medium a,
+.edmondsans-bold #font-selection li.edmondsans-bold a,
+.lavanderia-delicate #font-selection li.lavanderia-delicate a,
+.lavanderia-regular #font-selection li.lavanderia-regular a,
+.lavanderia-sturdy #font-selection li.lavanderia-sturdy a,
+.mission-script #font-selection li.mission-script a,
+.wisdom-script #font-selection li.wisdom-script a {
+  background: #F00;
+  color: white;
+}
 
 
 #the-textarea {
@@ -54,6 +68,7 @@ body, textarea {
 
 #font-selection {
   font-size: 16px;
+/*  border-left: 1px solid; */
 }
 
 #font-selection,
@@ -71,15 +86,17 @@ body, textarea {
 #font-selection .family {
   width: 200px;
   float: left;
+/*  border-top: 1px solid; */
 }
 
 #font-selection .family li {
-  margin: 5px;
+  text-align: center;
+/*  border-right: 1px solid; */
+/*  border-bottom: 1px solid; */
 }
 
 #font-selection a {
   padding: 5px;
-  border: 1px solid;
   color: #FE8;
   display: block;
   text-decoration: none;
