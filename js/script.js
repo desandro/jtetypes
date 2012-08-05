@@ -11,7 +11,11 @@
 'use strict';
 
 var $body, $theTextarea;
-var path = {}; // text, fontsize, font, style
+// text, fontsize, font, style
+// defaults
+var path = {
+  font: 'edmondsans-medium'
+};
 
 // helper function
 function capitalize( str ) {
@@ -128,7 +132,7 @@ var loadFamily = function( family, callback ) {
 };
 
 function selectFont( font ) {
-  console.log( 'selecting ', font );
+  // console.log( 'selecting ', font );
   // don't change if invalid font
   if ( !( font in fontFamilies ) ) {
     return;
@@ -150,6 +154,10 @@ function selectFont( font ) {
 var activeFont;
 
 function activateFont( font ) {
+  // don't proceed if font is already activated
+  if ( font === activeFont ) {
+    return;
+  }
   if ( activeFont ) {
     $body.removeClass( activeFont );
   }
@@ -162,16 +170,6 @@ function activateFont( font ) {
 // window.loadFont = loadFont;
 
 // var webFontsConfig
-
-var html = document.getElementsByTagName('html')[0];
-html.className += ' wf-loading';
-
-// set timeout if fonts never load
-// var timeout = setTimeout( function(){
-//   html.className = html.className.replace(/( |^)wf-loading( |$)/g,"");
-//   html.className += ' wf-inactive';
-//   // config.inactive();
-// }, 20 );
 
 var webFontScript = document.createElement('script');
 webFontScript.src= '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
@@ -277,7 +275,7 @@ function decode( text ) {
     .replace( /\\H/g, '#' ); // \H to #
 }
 
-var rePathPrefix = /[\w\-]+:/;
+var rePathPrefix = /^[\w\-]+:/;
 
 function getHashPath( hash ) {
   var hashPath = {};
