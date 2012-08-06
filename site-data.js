@@ -1,6 +1,8 @@
 
 (function( global ) {
 
+
+
 var siteData = {
   families: {
     duke: {
@@ -9,7 +11,8 @@ var siteData = {
         'Duke',
         'Duke Fill',
         'Duke Shadow'
-      ]
+      ],
+      urls: [ 'css/duke.css' ]
     },
 
     edmondsans: {
@@ -18,7 +21,8 @@ var siteData = {
         'Edmondsans Regular',
         'Edmondsans Medium',
         'Edmondsans Bold',
-      ]
+      ],
+      urls: [ 'css/edmondsans.css' ]
     },
 
     lavanderia: {
@@ -27,21 +31,24 @@ var siteData = {
         'Lavanderia Delicate',
         'Lavanderia Regular',
         'Lavanderia Sturdy',
-      ]
+      ],
+    urls: [ 'css/lavanderia.css' ]
     },
 
     'mission-script': {
       acquire: '<a href="http://www.losttype.com/font/?name=mission_script">Purchase Mission Script at Lost Type Co-Op</a>',
       fonts: [
         'Mission Script',
-      ]
+      ],
+      urls: [ 'css/mission-script.css' ]
     },
 
     'wisdom-script': {
       acquire: '<a href="http://www.losttype.com/font/?name=wisdom%20script">Purchase Wisdom Script at Lost Type Co-Op</a>',
       fonts: [
         'Wisdom Script',
-      ]
+      ],
+      urls: [ 'css/wisdom-script.css' ]
     }
 
   }

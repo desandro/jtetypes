@@ -44,10 +44,10 @@
         <ul>
           <%
             family.fonts.forEach( function( font, i ) {
-              var fontSlug = font.toLowerCase().replace( / /g, ' ' );
+              var fontSlug = font.toLowerCase().replace( / /g, '-' );
           %>
-            <li class="font <%= fontSlug %>" data-font="<%= fontSlug %>">
-              <%= font %>
+            <li class="font <%= fontSlug %>">
+              <a href="#!/in:<%= font %>/" data-font="<%= fontSlug %>"><%= font %></a>
             </li>
           <% }) %>
         </ul>

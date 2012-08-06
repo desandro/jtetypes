@@ -4,11 +4,13 @@
 
 
 /*jshint asi: true, curly: true, devel: true, eqeqeq: true, forin: false, newcap: true, noempty: true, strict: true, undef: true, browser: true */
-/*global WebFont: false, jQuery: false */
+/*global WebFont: false, jQuery: false, JTE: false */
 
-( function( window, document, location, $, undefined ) {
+( function( window, document, location, $, JTE, undefined ) {
 
 'use strict';
+
+var fontConfigs = JTE.siteData.families;
 
 var $body, $theTextarea;
 // text, fontsize, font, style
@@ -55,71 +57,40 @@ var debounce = function ( func, threshold ) {
 
 // -------------------------- fonts -------------------------- //
 
-var fontConfigs = {
-  duke: {
-    families: [
-      'Duke',
-      'Duke Fill',
-      'Duke Shadow'
-    ],
-    urls: [ 'css/duke.css' ]
-  },
-  edmondsans: {
-    families: [
-      'Edmondsans Regular',
-      'Edmondsans Medium',
-      'Edmondsans Bold'
-    ],
-    urls: [ 'css/edmondsans.css' ]
-  },
-  lavanderia: {
-    families: [
-      'Lavanderia Delicate',
-      'Lavanderia Regular',
-      'Lavanderia Sturdy'
-    ],
-    urls: [ 'css/lavanderia.css' ]
-  },
-  'mission-script': {
-    families: [
-      'Mission Script'
-    ],
-    urls: [ 'css/mission-script.css' ]
-  },
-  'wisdom-script': {
-    families: [
-      'Wisdom Script'
-    ],
-    urls: [ 'css/wisdom-script.css' ]
-  }
-};
-
-
+// hash of loaded families
+var loadedFamilies = {};
 // build a hash of familes of fonts
 var fontFamilies = {};
 var fonts, font;
 for ( var family in fontConfigs ) {
-  fonts = fontConfigs[ family ].families;
+  loadedFamilies[ family ] = false;
+  fonts = fontConfigs[ family ].fonts;
   for ( var i=0, len = fonts.length; i < len; i++ ) {
     font = fonts[i].replace( /\s/gi, '-' ).toLowerCase();
     fontFamilies[ font ] = family;
   }
 }
 
-window.fontConfigs = fontConfigs;
+// window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
-var loadFamily = function( family, callback ) {
+var loadFamily = function( familySlug, callback ) {
   // don't proceed if WebFont isn't ready
   if ( !window.WebFont ) {
     return;
   }
+  // console.log( fontConfigs, family, fontConfigs[ family ] );
+  var family = fontConfigs[ familySlug ];
+
   WebFont.load({
-    custom: fontConfigs[ family ],
+    custom: {
+      families: family.fonts,
+      urls: family.urls
+    },
     active: function() {
       // keep track of loaded family
-      fontConfigs[ family ].isLoaded = true;
+      loadedFamilies[ family ] = true;
       if ( callback ) {
         callback();
       }
@@ -140,7 +111,7 @@ function selectFont( font ) {
   // path.font = font;
   var family = fontFamilies[ font ];
 
-  if ( fontConfigs[ family ].isLoaded ) {
+  if ( loadedFamilies[ family ] ) {
     // family already loaded, select the font
     activateFont( font );
   } else {
@@ -205,6 +176,7 @@ firstScript.parentNode.insertBefore( webFontScript, firstScript );
 function onFontSelectionClick( event ) {
   var $target = $( event.target );
   var font = $target.attr('data-font');
+  // console.log('on click', font, $target );
   selectFont( font );
   event.preventDefault();
 }
@@ -362,4 +334,4 @@ $( function() {
 
 });
 
-})( window, document, location, jQuery );
+})( window, document, location, jQuery, JTE );
