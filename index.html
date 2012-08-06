@@ -51,9 +51,13 @@ families:
   <div class="clearfix">
 
     <div id="acquire">
-      {% for family in page.families %}
-        <p class="{{ family.slug }}">{{ family.acquire }}</p>
-      {% endfor %}
+      <%
+        var family;
+        for ( var familySlug in families ) {
+          family = families[ familySlug ];
+      %>
+        <p class="<%= familySlug %>"><%= family.acquire %></p>
+      <% } %>
     </div>
 
     <div id="font-sizer">
@@ -65,15 +69,25 @@ families:
   </div>
 
   <ul id="font-selection" class="clearfix">
-    {% for family in page.families %}
-      <li class="family {{ family.slug }}" data-family="{{ family.slug }}">
+
+    <%
+      var family;
+      for ( var familySlug in families ) {
+        family = families[ familySlug ];
+    %>
+      <li class="family <%= family %>">
         <ul>
-          {% for font in family.fonts %}
-            <li class="{{ font | downcase | replace:' ','-' }}"><a href="#!/in:{{ font | replace:' ','-' }}" data-font="{{ font | downcase | replace:' ','-' }}">{{ font }}</a></li>
-          {% endfor %}
+          <%
+            family.fonts.forEach( function( font, i ) {
+              var fontSlug = font.toLowerCase().replace( / /g, ' ' );
+          %>
+            <li class="font <%= fontSlug %>" data-font="<%= fontSlug %>">
+              <%= font %>
+            </li>
+          <% }) %>
         </ul>
       </li>
-    {% endfor %}
+    <% } %>
   </ul>
 
 </div>
@@ -81,6 +95,7 @@ families:
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui-slider.min.js"></script>
 <script src="modules/jquery-bbq/jquery.ba-bbq.min.js"></script>
+<script src="site-data.js"></script>
 <script src="js/script.js"></script>
 
 </body>
