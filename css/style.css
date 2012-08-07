@@ -100,6 +100,31 @@ a:hover { color: yellow; }
   padding: 0;
 }
 
+/* ---- h3 ---- */
+
+#font-selection h3 {
+  font-weight: normal;
+  font-size: 32px;
+}
+
+#font-selection .duke h3 {
+  font-family: 'Duke';
+}
+#font-selection .edmondsans h3 {
+  font-family: 'Edmondsans Medium';
+}
+#font-selection .lavanderia h3 {
+  font-family: 'Lavanderia Regular';
+}
+#font-selection .mission-script h3 {
+  font-family: 'Mission Script';
+}
+#font-selection .wisdom-script h3 {
+  font-family: 'Wisdom Script';
+}
+
+/* ---- items ---- */
+
 #font-selection li {
   list-style: none;
   margin: 0;

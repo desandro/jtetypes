@@ -42,7 +42,7 @@
       for ( var familySlug in families ) {
         family = families[ familySlug ];
     %>
-      <li class="family <%= family %>">
+      <li class="family <%= familySlug %>">
         <h3>
           <a class="js-activate-font" href="#!/in:<%= family.primaryFont %>" data-font="<%= family.primaryFont.toLowerCase() %>"><%= family.title %></a>
         </h3>
