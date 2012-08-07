@@ -14,22 +14,21 @@ html, body {
 }
 
 body {
-  padding: 10px;
   padding-bottom: 200px;
 /*  min-height: 100%;*/
 }
 
 body, textarea {
-  background: #303030;
+  background: #222;
   color: white;
   font-family: 'Edmondsans Medium', sans-serif;
 }
 
 a {
-  color: #FE8;
+  color: white;
   text-decoration: none;
 }
-a:hover { color: red; }
+a:hover { color: yellow; }
 
 /* ----------------- text area ----------------- */
 
@@ -46,24 +45,29 @@ a:hover { color: red; }
 .mission-script textarea { font-family: 'Mission Script'; }
 .wisdom-script textarea { font-family: 'Wisdom Script'; }
 
+#textarea-wrap {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
 
 #the-textarea {
   border: none;
   text-align: center;
-  width: 100%;
-  height: 100%;
   font-size: 56px;
   padding: 0.15em;
-  display: block;
-  border: 2px solid transparent;
+  display: table-cell;
+  border: 10px solid transparent;
+  vertical-align: middle;
 }
 
-#the-textarea:hover, #the-textarea:focus { border-color: white; }
+#the-textarea:hover, #the-textarea:focus { border-color: #DA624E; }
 
 /* ----------------- controls ----------------- */
 
 #controls {
-  background: #222;
+  background: #DA624E;
   position: absolute;
   bottom: 0;
   padding: 10px;

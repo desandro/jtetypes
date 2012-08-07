@@ -94,10 +94,10 @@ var loadFamily = function( familySlug, callback ) {
       if ( callback ) {
         callback();
       }
-      console.log( family + ' family active');
+      console.log( familySlug + ' family active');
     },
     inactive: function() {
-      console.log( family + ' family inactive');
+      console.log( familySlug + ' family inactive');
     }
   });
 };
@@ -185,7 +185,8 @@ var changeTimeout;
 
 
 function onTextareaChange( event ) {
-  path.text = $theTextarea.val();
+  // console.log( event.type );
+  path.text = $theTextarea.html();
   debouncedPushIt();
 }
 
@@ -288,7 +289,7 @@ function getHashPath( hash ) {
         // set text area value
         if ( !textIsSet && part !== '' && part !== '#!' ) {
           path.text = decode( part );
-          $theTextarea.val( path.text );
+          $theTextarea.html( path.text );
           textIsSet = true;
         }
     }
@@ -314,6 +315,20 @@ $( function() {
   $acquire = $('#acquire');
 
   $theTextarea = $('#the-textarea');
+
+  // http://stackoverflow.com/a/6263537
+  // $theTextarea.on( 'focus', function() {
+  //   console.log('textarea focus');
+  //   var $this = $(this);
+  //   $this.data( 'before', $this.text() );
+  // }).on( 'blur keyup paste', function() {
+  //   var $this = $(this);
+  //   if ( $.data( this, 'before' ) !== $this.text() ) {
+  //     $this.data( 'before', $this.html() );
+  //     $this.trigger('change');
+  //   }
+  // });
+
   $theTextarea.on( 'keyup change', onTextareaChange );
 
   var initialFontSize = $theTextarea.css('font-size');
