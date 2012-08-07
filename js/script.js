@@ -222,7 +222,7 @@ var changeTimeout;
 
 function onTextareaChange( event ) {
   // console.log( event.type );
-  path.text = $theTextarea.html();
+  path.text = $theTextarea.val();
   debouncedPushIt();
 }
 
@@ -325,7 +325,7 @@ function getHashPath( hash ) {
         // set text area value
         if ( !textIsSet && part !== '' && part !== '#!' ) {
           path.text = decode( part );
-          $theTextarea.html( path.text );
+          $theTextarea.val( path.text );
           textIsSet = true;
         }
     }
