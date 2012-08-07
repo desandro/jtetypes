@@ -62,7 +62,7 @@ a:hover { color: yellow; }
   vertical-align: middle;
 }
 
-#the-textarea:hover, #the-textarea:focus { border-color: #DA624E; }
+#the-textarea:hover, #the-textarea:focus { border-color: white; }
 
 /* ----------------- controls ----------------- */
 
@@ -105,13 +105,17 @@ a:hover { color: yellow; }
 #font-selection h3 {
   font-weight: normal;
   font-size: 32px;
+  line-height: 40px;
+  margin: 0 0 8px;
 }
 
 #font-selection .duke h3 {
   font-family: 'Duke';
+  font-size: 42px;
 }
 #font-selection .edmondsans h3 {
   font-family: 'Edmondsans Medium';
+  font-size: 28px;
 }
 #font-selection .lavanderia h3 {
   font-family: 'Lavanderia Regular';
@@ -121,6 +125,7 @@ a:hover { color: yellow; }
 }
 #font-selection .wisdom-script h3 {
   font-family: 'Wisdom Script';
+    font-size: 27px;
 }
 
 /* ---- items ---- */
@@ -132,28 +137,23 @@ a:hover { color: yellow; }
 }
 
 #font-selection .family {
-  width: 200px;
+  width: 192px;
+/*  border: 1px solid;*/
   float: left;
 /*  border-top: 1px solid; */
 }
 
 #font-selection .family li {
-  text-align: center;
-/*  border-right: 1px solid; */
-/*  border-bottom: 1px solid; */
+  display: inline-block;
+  font-size: 13px;
 }
 
 #font-selection a {
-  padding: 5px;
-  color: #FE8;
-  display: block;
-  text-decoration: none;
+  color: white;
 }
 
 #font-selection a:hover {
-  background: white;
-  border-color: white;
-  color: #303030;
+  color: #222;
 }
 
 #font-selection .is-active a {

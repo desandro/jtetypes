@@ -11,7 +11,12 @@ var siteData = {
         'Duke',
         'Duke Fill',
         'Duke Shadow'
-      ]
+      ],
+      variations: {
+        'Regular': 'Duke',
+        'Fill': 'Duke Fill',
+        'Shadow': 'Duke Shadow'
+      }
     },
 
     edmondsans: {
@@ -22,7 +27,12 @@ var siteData = {
         'Edmondsans Regular',
         'Edmondsans Medium',
         'Edmondsans Bold'
-      ]
+      ],
+      variations: {
+        'Regular': 'Edmondsans Regular',
+        'Medium': 'Edmondsans Medium',
+        'Bold': 'Edmondsans Bold'
+      }
     },
 
     lavanderia: {
@@ -33,7 +43,12 @@ var siteData = {
         'Lavanderia Delicate',
         'Lavanderia Regular',
         'Lavanderia Sturdy'
-      ]
+      ],
+      variations: {
+        'Delicate': 'Lavanderia Delicate',
+        'Regular': 'Lavanderia Regular',
+        'Sturdy': 'Lavanderia Sturdy'
+      }
     },
 
     'mission-script': {

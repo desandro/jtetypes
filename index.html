@@ -46,17 +46,21 @@
         <h3>
           <a class="js-activate-font" href="#!/in:<%= family.primaryFont %>" data-font="<%= family.primaryFont.toLowerCase() %>"><%= family.title %></a>
         </h3>
-        <ul>
-          <%
-            family.fonts.forEach( function( font, i ) {
-              var hyphenatedFont = font.replace( / /g, '-' );
-              var fontSlug = hyphenatedFont.toLowerCase();
-          %>
-            <li class="font <%= fontSlug %>">
-              <a class="js-activate-font" href="#!/in:<%= hyphenatedFont %>/" data-font="<%= fontSlug %>"><%= font %></a>
-            </li>
-          <% }) %>
-        </ul>
+        <% if ( family.variations ) { %>
+          <ul class="variations">
+            <%
+              var font;
+              for ( var variation in family.variations ) {
+                font = family.variations[ variation ];
+                var hyphenatedFont = font.replace( / /g, '-' );
+                var fontSlug = hyphenatedFont.toLowerCase();
+            %>
+              <li class="variation <%= fontSlug %>">
+                <a class="js-activate-font" href="#!/in:<%= hyphenatedFont %>/" data-font="<%= fontSlug %>"><%= variation %></a>
+              </li>
+            <% } %>
+          </ul>
+        <% } %>
       </li>
     <% } %>
   </ul>
