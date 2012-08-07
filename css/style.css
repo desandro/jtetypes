@@ -4,7 +4,7 @@
           box-sizing: border-box;
 }
 
-body, input, textarea {
+body, input, #the-textarea {
   margin: 0;
   padding: 0;
 }
@@ -18,7 +18,7 @@ body {
 /*  min-height: 100%;*/
 }
 
-body, textarea {
+body, #the-textarea {
   background: #222;
   color: white;
   font-family: 'Edmondsans Medium', sans-serif;
@@ -33,17 +33,17 @@ a:hover { color: yellow; }
 /* ----------------- text area ----------------- */
 
 /* font in text area */
-.duke textarea { font-family: 'Duke'; }
-.duke-shadow textarea { font-family: 'Duke Shadow'; }
-.duke-fill textarea { font-family: 'Duke Fill'; }
-.edmondsans-regular textarea { font-family: 'Edmondsans Regular'; }
-.edmondsans-medium textarea { font-family: 'Edmondsans Medium'; }
-.edmondsans-bold textarea { font-family: 'Edmondsans Bold'; }
-.lavanderia-delicate textarea { font-family: 'Lavanderia Delicate'; }
-.lavanderia-regular textarea { font-family: 'Lavanderia Regular'; }
-.lavanderia-sturdy textarea { font-family: 'Lavanderia Sturdy'; }
-.mission-script textarea { font-family: 'Mission Script'; }
-.wisdom-script textarea { font-family: 'Wisdom Script'; }
+.duke #the-textarea { font-family: 'Duke'; }
+.duke-shadow #the-textarea { font-family: 'Duke Shadow'; }
+.duke-fill #the-textarea { font-family: 'Duke Fill'; }
+.edmondsans-regular #the-textarea { font-family: 'Edmondsans Regular'; }
+.edmondsans-medium #the-textarea { font-family: 'Edmondsans Medium'; }
+.edmondsans-bold #the-textarea { font-family: 'Edmondsans Bold'; }
+.lavanderia-delicate #the-textarea { font-family: 'Lavanderia Delicate'; }
+.lavanderia-regular #the-textarea { font-family: 'Lavanderia Regular'; }
+.lavanderia-sturdy #the-textarea { font-family: 'Lavanderia Sturdy'; }
+.mission-script #the-textarea { font-family: 'Mission Script'; }
+.wisdom-script #the-textarea { font-family: 'Wisdom Script'; }
 
 #textarea-wrap {
   display: table;

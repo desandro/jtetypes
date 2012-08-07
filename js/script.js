@@ -10,7 +10,8 @@
 
 'use strict';
 
-var fontConfigs = JTE.siteData.families;
+var fontConfigs = JTE.siteData.fontConfigs;
+var families = JTE.siteData.families;
 
 var $body, $theTextarea;
 // text, fontsize, font, style
@@ -36,7 +37,9 @@ function capitalizeHyphenated( str ) {
   return cappedWords.join('-');
 }
 
-
+function lowerHyphenate( str ) {
+  return str.replace( /\s+/gi, '-' ).toLowerCase();
+}
 
 // variation on...
 // http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
@@ -57,66 +60,98 @@ var debounce = function ( func, threshold ) {
 
 // -------------------------- fonts -------------------------- //
 
-// hash of loaded families
-var loadedFamilies = {};
-// build a hash of familes of fonts
-var fontFamilies = {};
-var fonts, font;
-for ( var family in fontConfigs ) {
-  loadedFamilies[ family ] = false;
-  fonts = fontConfigs[ family ].fonts;
-  for ( var i=0, len = fonts.length; i < len; i++ ) {
-    font = fonts[i].replace( /\s/gi, '-' ).toLowerCase();
-    fontFamilies[ font ] = family;
+// build a hash of fonts
+
+var siteFonts = {};
+( function() {
+  var groupFonts, font;
+  for ( var group in fontConfigs ) {
+    groupFonts = fontConfigs[ group ].families;
+    for ( var i=0, len = groupFonts.length; i < len; i++ ) {
+      font = lowerHyphenate( groupFonts[i] );
+      siteFonts[ font ] = {
+        group: group,
+        isLoaded: false
+      };
+    }
   }
-}
+
+})()
+
+// build a hash of fonts and their families
+
+var familyFonts = {};
+( function() {
+  var fonts, font;
+  for ( var family in families ) {
+    fonts = families[ family ].fonts;
+    for ( var i=0, len = fonts.length; i < len; i++ ) {
+      font = lowerHyphenate( fonts[i] );
+      familyFonts[ font ] = family;
+    }
+  }
+
+})()
+
+// console.log( familyFonts );
+
 
 // window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
-var loadFamily = function( familySlug, callback ) {
+function onWebFontActive( font, weight ) {
+  font = lowerHyphenate( font );
+  siteFonts[ font ].isLoaded = true;
+}
+
+function onWebFontInactive( font, weight ) {
+  console.log( font + ' font inactive' );
+}
+
+var loadFontGroup = function( font, callback ) {
   // don't proceed if WebFont isn't ready
   if ( !window.WebFont ) {
     return;
   }
   // console.log( fontConfigs, family, fontConfigs[ family ] );
-  var family = fontConfigs[ familySlug ];
+  // var group = siteFonts[ ]
+  var group = siteFonts[ font ].group;
+  var fontConfig = fontConfigs[ group ];
 
   WebFont.load({
-    custom: {
-      families: family.fonts,
-      urls: family.urls
-    },
+    custom: fontConfig,
     active: function() {
       // keep track of loaded family
-      loadedFamilies[ family ] = true;
+      // siteFonts[ font ].isLoaded = true;
       if ( callback ) {
         callback();
       }
-      console.log( familySlug + ' family active');
+      console.log( group + ' font group active');
     },
     inactive: function() {
-      console.log( familySlug + ' family inactive');
-    }
+      console.log( group + ' font group inactive');
+    },
+    fontactive: onWebFontActive,
+    fontinactive: onWebFontInactive
   });
 };
 
 function selectFont( font ) {
   // console.log( 'selecting ', font );
   // don't change if invalid font
-  if ( !( font in fontFamilies ) ) {
+  if ( !( font in siteFonts ) ) {
     return;
   }
   // path.font = font;
-  var family = fontFamilies[ font ];
+  // var family = fontFamilies[ font ];
 
-  if ( loadedFamilies[ family ] ) {
+  if ( siteFonts[ font ].isLoaded ) {
     // family already loaded, select the font
     activateFont( font );
   } else {
     // family not loaded, load the family, then select font
-    loadFamily( family, function() {
+    loadFontGroup( font, function() {
       activateFont( font );
     });
   }
@@ -130,7 +165,7 @@ function activateFont( font ) {
     return;
   }
 
-  var family = fontFamilies[ font ];
+  var family = familyFonts[ font ];
 
   if ( activeFont ) {
     $body.removeClass( activeFont );

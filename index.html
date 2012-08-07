@@ -43,13 +43,17 @@
         family = families[ familySlug ];
     %>
       <li class="family <%= family %>">
+        <h3>
+          <a class="js-activate-font" href="#!/in:<%= family.primaryFont %>" data-font="<%= family.primaryFont.toLowerCase() %>"><%= family.title %></a>
+        </h3>
         <ul>
           <%
             family.fonts.forEach( function( font, i ) {
-              var fontSlug = font.toLowerCase().replace( / /g, '-' );
+              var hyphenatedFont = font.replace( / /g, '-' );
+              var fontSlug = hyphenatedFont.toLowerCase();
           %>
             <li class="font <%= fontSlug %>">
-              <a href="#!/in:<%= font %>/" data-font="<%= fontSlug %>"><%= font %></a>
+              <a class="js-activate-font" href="#!/in:<%= hyphenatedFont %>/" data-font="<%= fontSlug %>"><%= font %></a>
             </li>
           <% }) %>
         </ul>
