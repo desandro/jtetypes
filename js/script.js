@@ -196,11 +196,12 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   }
   console.log('WebFont should be ready');
   // load edmondsans family first
-  // loadFamily('edmondsans');
-  // $( window ).trigger( 'hashchange' );
+  var family = familyFonts[ path.font ];
+  if ( family !== 'initial' ) {
+    loadFontGroup( 'edmondsans-medium' );
+  }
+  // load selected font
   selectFont( path.font );
-  // clearTimeout( timeout );
-  // WebFont.load()
 };
 
 var firstScript = document.getElementsByTagName('script')[0];
