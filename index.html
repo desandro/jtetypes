@@ -18,16 +18,6 @@
 <div id="controls">
   <div class="clearfix">
 
-    <div id="acquire">
-      <%
-        var family;
-        for ( var familySlug in families ) {
-          family = families[ familySlug ];
-      %>
-        <p class="<%= familySlug %>"><%= family.acquire %></p>
-      <% } %>
-    </div>
-
     <div id="font-sizer">
       <label for="font-size">Font size</label>
       <div id="font-size"></div>
@@ -62,6 +52,9 @@
             <% } %>
           </ul>
         <% } %>
+        <div class="acquire">
+          <%= family.acquire %>
+        </div>
       </li>
     <% } %>
   </ul>

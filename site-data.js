@@ -6,7 +6,7 @@ var siteData = {
     duke: {
       title: 'Duke',
       primaryFont: 'Duke',
-      acquire: '<a href="http://www.losttype.com/font/?name=duke">Purchase Duke at Lost Type Co-Op</a>',
+      acquire: '<a href="http://www.losttype.com/font/?name=duke">Buy</a>',
       fonts: [
         'Duke',
         'Duke Fill',
@@ -22,7 +22,7 @@ var siteData = {
     edmondsans: {
       title: 'Edmondsans',
       primaryFont: 'Edmondsans-Medium',
-      acquire: '<a href="http://www.losttype.com/font/?name=edmondsans">Purchase Edmondsans at Lost Type Co-Op</a>',
+      acquire: '<a href="http://www.losttype.com/font/?name=edmondsans">Buy</a>',
       fonts: [
         'Edmondsans Regular',
         'Edmondsans Medium',
@@ -38,7 +38,7 @@ var siteData = {
     lavanderia: {
       title: 'Lavanderia',
       primaryFont: 'Lavanderia-Regular',
-      acquire: '<a href="http://www.losttype.com/font/?name=lavanderia">Purchase Lavandria at Lost Type Co-Op</a>',
+      acquire: '<a href="http://www.losttype.com/font/?name=lavanderia">Buy</a>',
       fonts: [
         'Lavanderia Delicate',
         'Lavanderia Regular',
@@ -54,7 +54,7 @@ var siteData = {
     'mission-script': {
       title: 'Mission Script',
       primaryFont: 'Mission-Script',
-      acquire: '<a href="http://www.losttype.com/font/?name=mission_script">Purchase Mission Script at Lost Type Co-Op</a>',
+      acquire: '<a href="http://www.losttype.com/font/?name=mission_script">Buy</a>',
       fonts: [
         'Mission Script'
       ]
@@ -63,7 +63,7 @@ var siteData = {
     'wisdom-script': {
       title: 'Wisdom Script',
       primaryFont: 'Wisdom-Script',
-      acquire: '<a href="http://www.losttype.com/font/?name=wisdom%20script">Purchase Wisdom Script at Lost Type Co-Op</a>',
+      acquire: '<a href="http://www.losttype.com/font/?name=wisdom%20script">Buy</a>',
       fonts: [
         'Wisdom Script'
       ]

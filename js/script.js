@@ -170,11 +170,11 @@ function activateFont( font ) {
   if ( activeFont ) {
     $body.removeClass( activeFont );
     $fontSelection.find('.is-active').removeClass('is-active');
-    $acquire.find('.is-active').removeClass('is-active');
+    $fontSelection.find('.is-active-family').removeClass('is-active-family');
   }
   $body.addClass( font );
   $fontSelection.find('li.' + font ).not('.family').addClass('is-active');
-  $acquire.find( '.' + family ).addClass('is-active');
+  $fontSelection.find( '.family.' + family ).addClass('is-active-family');
   positionTextarea();
   activeFont = font;
   console.log('activated ' + font );
