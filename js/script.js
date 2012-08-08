@@ -341,7 +341,6 @@ function setFontSize( size ) {
   $theTextarea.css( sizeStyle );
   $dummyArea.css( sizeStyle );
   positionTextarea();
-  $fontSizeOutput.text( size );
 }
 
 // -------------------------- centering textarea -------------------------- //
@@ -373,7 +372,7 @@ function mimicTextarea() {
 
 // -------------------------- doc ready -------------------------- //
 
-var $fontSizeOutput, $fontSelection, $acquire, $dummyArea, $textareaWrap;
+var $fontSelection, $acquire, $dummyArea, $textareaWrap;
 var fontSizeSlider;
 
 $( function() {
@@ -388,8 +387,6 @@ $( function() {
   $theTextarea.on( 'keyup change', onTextareaChange );
 
   var initialFontSize = $theTextarea.css('font-size');
-
-  $fontSizeOutput = $('#font-sizer .output').text( initialFontSize );
 
   // set up slider
   fontSizeSlider = $('#font-size').slider({
