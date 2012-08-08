@@ -76,9 +76,13 @@ a:hover { color: yellow; }
   height: 100%;
 }
 
+/* position way off screen,
+  hopefully doesn't eff up scrollbars */
 #textarea-wrap .dummy.area {
   color: blue;
   visibility: hidden;
+  left: -10000%;
+  top: -10000%;
 }
 
 #the-textarea:hover, #the-textarea:focus { border-color: white; }
