@@ -221,8 +221,9 @@ var changeTimeout;
 
 
 function onTextareaChange( event ) {
+  mimicTextarea();
   // console.log( event.type );
-  path.text = $theTextarea.val();
+  path.text = text;
   debouncedPushIt();
 }
 
@@ -326,6 +327,7 @@ function getHashPath( hash ) {
         if ( !textIsSet && part !== '' && part !== '#!' ) {
           path.text = decode( part );
           $theTextarea.val( path.text );
+          mimicTextarea();
           textIsSet = true;
         }
     }
@@ -340,9 +342,36 @@ function setFontSize( size ) {
   $fontSizeOutput.text( size );
 }
 
+// -------------------------- centering textarea -------------------------- //
+
+
+function formatDummyText( text ) {
+  if ( !text ) {
+    return '&nbsp;';
+  }
+  return text.replace( /\n$/, '<br>&nbsp;' )
+    .replace( /\n/g, '<br>' );
+}
+
+function positionTextarea() {
+  var h = $textareaWrap.height();
+  var top = Math.max( 0, ( h - $dummyArea.innerHeight() ) * 0.5 );
+  $theTextarea.css({
+    paddingTop: top
+  });
+}
+
+function mimicTextarea() {
+  // for positioning text area
+  var text = $theTextarea.val();
+  var html = formatDummyText( text );
+  $dummyArea.html( html );
+  positionTextarea();
+}
+
 // -------------------------- doc ready -------------------------- //
 
-var $fontSizeOutput, $fontSelection, $acquire;
+var $fontSizeOutput, $fontSelection, $acquire, $dummyArea, $textareaWrap;
 var fontSizeSlider;
 
 $( function() {
@@ -350,20 +379,9 @@ $( function() {
   $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
   $acquire = $('#acquire');
 
+  $textareaWrap = $('#textarea-wrap');
   $theTextarea = $('#the-textarea');
-
-  // http://stackoverflow.com/a/6263537
-  // $theTextarea.on( 'focus', function() {
-  //   console.log('textarea focus');
-  //   var $this = $(this);
-  //   $this.data( 'before', $this.text() );
-  // }).on( 'blur keyup paste', function() {
-  //   var $this = $(this);
-  //   if ( $.data( this, 'before' ) !== $this.text() ) {
-  //     $this.data( 'before', $this.html() );
-  //     $this.trigger('change');
-  //   }
-  // });
+  $dummyArea = $textareaWrap.find('.dummy');
 
   $theTextarea.on( 'keyup change', onTextareaChange );
 
