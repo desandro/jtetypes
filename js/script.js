@@ -175,6 +175,7 @@ function activateFont( font ) {
   $body.addClass( font );
   $fontSelection.find('li.' + font ).not('.family').addClass('is-active');
   $acquire.find( '.' + family ).addClass('is-active');
+  positionTextarea();
   activeFont = font;
   console.log('activated ' + font );
   path.font = font;
@@ -223,7 +224,7 @@ var changeTimeout;
 function onTextareaChange( event ) {
   mimicTextarea();
   // console.log( event.type );
-  path.text = text;
+  path.text = $theTextarea.val();
   debouncedPushIt();
 }
 
@@ -336,9 +337,10 @@ function getHashPath( hash ) {
 
 function setFontSize( size ) {
   size = parseInt( size, 10 ) + 'px';
-  $theTextarea.css({
-    fontSize: size
-  });
+  var sizeStyle = { fontSize: size };
+  $theTextarea.css( sizeStyle );
+  $dummyArea.css( sizeStyle );
+  positionTextarea();
   $fontSizeOutput.text( size );
 }
 
