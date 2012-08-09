@@ -241,10 +241,34 @@ a:hover { color: yellow; }
 }
 
 /* only show variations and acquire when active */
-#font-selection .variations,
-#font-selection .acquire { display: none; }
-#font-selection .is-active-family .variations,
-#font-selection .is-active-family .acquire { display: block; }
+.no-csstransforms #font-selection .variations,
+.no-csstransforms #font-selection .acquire { display: none; }
+.no-csstransforms #font-selection .is-active-family .variations,
+.no-csstransforms #font-selection .is-active-family .acquire { display: block; }
+
+.csstransforms #font-selection .variations,
+.csstransforms #font-selection .acquire {
+  -webkit-transform: scale(0.01);
+     -moz-transform: scale(0.01);
+      -ms-transform: scale(0.01);
+       -o-transform: scale(0.01);
+          transform: scale(0.01);
+  -webkit-transition: -webkit-transform 0.4s;
+     -moz-transition:    -moz-transform 0.4s;
+      -ms-transition:     -ms-transform 0.4s;
+       -o-transition:      -o-transform 0.4s;
+          transition:         transform 0.4s;
+}
+
+.csstransforms #font-selection .is-active-family .variations,
+.csstransforms #font-selection .is-active-family .acquire {
+  -webkit-transform: scale(1);
+     -moz-transform: scale(1);
+      -ms-transform: scale(1);
+       -o-transform: scale(1);
+          transform: scale(1);
+}
+
 
 #font-selection .variation {
   display: inline-block;
@@ -284,6 +308,8 @@ a:hover { color: yellow; }
   background: #222;
   color: white;
 }
+
+
 
 /* ----------------- font size ----------------- */
 
@@ -347,7 +373,7 @@ a:hover { color: yellow; }
 /* ----------------- footer ----------------- */
 
 #controls footer {
-  font-size: 14px;
+  font-size: 13px;
   position: absolute;
   width: 100%;
   left: 0;
