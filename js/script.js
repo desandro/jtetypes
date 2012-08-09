@@ -137,7 +137,7 @@ var loadFontGroup = function( font, callback ) {
   });
 };
 
-function selectFont( font ) {
+function selectFont( font, callback ) {
   // console.log( 'selecting ', font );
   // don't change if invalid font
   if ( !( font in siteFonts ) ) {
@@ -146,14 +146,20 @@ function selectFont( font ) {
   // path.font = font;
   // var family = fontFamilies[ font ];
 
+  var onFontGroupLoaded = function() {
+    activateFont( font );
+    if ( callback ) {
+      console.log('font group loaded, triggering callback');
+      callback();
+    }
+  };
+
   if ( siteFonts[ font ].isLoaded ) {
     // family already loaded, select the font
-    activateFont( font );
+    onFontGroupLoaded()
   } else {
     // family not loaded, load the family, then select font
-    loadFontGroup( font, function() {
-      activateFont( font );
-    });
+    loadFontGroup( font, onFontGroupLoaded );
   }
 }
 
@@ -186,6 +192,11 @@ function activateFont( font ) {
 // window.loadFont = loadFont;
 
 // var webFontsConfig
+var initialFamilyLoadedCallback = function() {
+  $body.removeClass('unloaded');
+};
+
+
 
 var webFontScript = document.createElement('script');
 webFontScript.src= '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
@@ -197,12 +208,13 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   }
   console.log('WebFont should be ready');
   // load edmondsans family first
+  
   var family = familyFonts[ path.font ];
   if ( family !== 'initial' ) {
-    loadFontGroup( 'edmondsans-medium' );
+    loadFontGroup( 'edmondsans-medium', initialFamilyLoadedCallback );
   }
   // load selected font
-  selectFont( path.font );
+  selectFont( path.font, initialFamilyLoadedCallback );
 };
 
 var firstScript = document.getElementsByTagName('script')[0];
@@ -372,11 +384,12 @@ function mimicTextarea() {
 
 // -------------------------- doc ready -------------------------- //
 
-var $fontSelection, $acquire, $dummyArea, $textareaWrap;
+var $fontSelection, $acquire, $dummyArea, $textareaWrap, $wrap;
 var fontSizeSlider;
 
 $( function() {
   $body = $('body');
+  $wrap = $('#wrap');
   $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
   $acquire = $('#acquire');
 

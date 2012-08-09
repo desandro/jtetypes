@@ -34,6 +34,25 @@ a {
 }
 a:hover { color: yellow; }
 
+/* ----------------- wrap ----------------- */
+
+
+
+#wrap {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.8s;
+     -moz-transition: opacity 0.8s;
+      -ms-transition: opacity 0.8s;
+       -o-transition: opacity 0.8s;
+          transition: opacity 0.8s;
+}
+
+.unloaded #wrap {
+  opacity: 0;
+}
+
+
 /* ----------------- text area ----------------- */
 
 /* font in text area */
@@ -61,6 +80,7 @@ a:hover { color: yellow; }
   position: absolute;
   left: 0;
   top: 0;
+  font-size: 56px;
   text-align: center;
   padding: 0.15em;
   display: block;
@@ -124,6 +144,11 @@ a:hover { color: yellow; }
   margin: 0;
 }
 
+/* helps reduce un-changed bits */
+#font-selection h3 a {
+  padding: 0.2em;
+}
+
 #font-selection .duke h3 {
   font-family: 'Duke';
   font-size: 42px;
@@ -177,7 +202,7 @@ a:hover { color: yellow; }
 }
 
 #font-selection a:hover {
-  color: #FF0;
+  color: #222;
 }
 
 #font-selection .is-active-family h3 a,
@@ -205,7 +230,10 @@ a:hover { color: yellow; }
           transform: rotate(-15deg);
 }
 
-#font-selection .acquire a:hover { background: yellow; }
+#font-selection .acquire a:hover {
+  background: #222;
+  color: white;
+}
 
 /* ----------------- font size ----------------- */
 
@@ -233,6 +261,7 @@ a:hover { color: yellow; }
   top: 3px;
 }
 
+/*#font-size:hover hr { border-color: #222; }*/
 
 /* ----------------- slider ----------------- */
 
@@ -259,9 +288,12 @@ a:hover { color: yellow; }
   width: 16px;
   background: white;
   border-radius: 50%;
+  outline: none;
 }
 
 .ui-slider-horizontal .ui-slider-handle { top: 3px; }
+
+/*.ui-slider .ui-slider-handle.ui-state-hover { background: #222; }*/
 
 /* ----------------- clearfix ----------------- */
 
