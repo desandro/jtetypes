@@ -13,8 +13,8 @@ var siteData = {
         'Duke Shadow'
       ],
       variations: {
-        'Regular': 'Duke',
         'Fill': 'Duke Fill',
+        'Regular': 'Duke',
         'Shadow': 'Duke Shadow'
       }
     },
