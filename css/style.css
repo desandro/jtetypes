@@ -125,6 +125,9 @@ a:hover { color: yellow; }
 /*  border-top: 2px solid white;*/
 }
 
+#controls a { color: white; }
+#controls a:hover { color: #222; }
+
 .toggler {
   position: absolute;
   left: 50%;
@@ -252,14 +255,6 @@ a:hover { color: yellow; }
   padding: 0 0.2em;
 }
 
-#font-selection a {
-  color: white;
-}
-
-#font-selection a:hover {
-  color: #222;
-}
-
 #font-selection .is-active-family h3 a,
 #font-selection .is-active a {
   color: #222;
@@ -294,10 +289,9 @@ a:hover { color: yellow; }
 
 #font-sizer {
   position: relative;
-  padding-left: 90px;
-  padding-right: 70px;
+  padding: 0 20px;
   height: 40px;
-  max-width: 700px;
+  max-width: 620px;
   margin: 0 auto;
   font-size: 14px;
 }
@@ -349,6 +343,22 @@ a:hover { color: yellow; }
 .ui-slider-horizontal .ui-slider-handle { top: 3px; }
 
 /*.ui-slider .ui-slider-handle.ui-state-hover { background: #222; }*/
+
+/* ----------------- footer ----------------- */
+
+#controls footer {
+  font-size: 14px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 4px;
+}
+
+#controls footer p {
+  display: inline-block;
+  width: 360px;
+  margin: 0;
+}
 
 /* ----------------- clearfix ----------------- */
 
