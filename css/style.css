@@ -14,8 +14,8 @@ html, body {
 }
 
 body {
-/*  padding-bottom: 200px;*/
-/*  min-height: 100%;*/
+  min-width: 960px;
+  overflow: hidden;
 }
 
 body {
