@@ -1,9 +1,9 @@
 @font-face{
   font-family: 'Lavanderia Delicate';
-  src: url('../fonts/Lavanderia-Delicate.otf') format('opentype');
+  src: url('../fonts/Lavanderia-Delicate.eot?') format('eot'), url('../fonts/Lavanderia-Delicate.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Lavanderia Sturdy';
-  src: url('../fonts/Lavanderia-Sturdy.otf') format('opentype');
+  src: url('../fonts/Lavanderia-Sturdy.eot?') format('eot'), url('../fonts/Lavanderia-Sturdy.otf') format('opentype');
 }
