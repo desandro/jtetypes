@@ -193,7 +193,7 @@ function activateFont( font ) {
 
 // var webFontsConfig
 var initialFamilyLoadedCallback = function() {
-  $body.removeClass('unloaded');
+  $body.addClass('is-ready');
 };
 
 
@@ -211,7 +211,7 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   
   var family = familyFonts[ path.font ];
   if ( family !== 'initial' ) {
-    loadFontGroup( 'edmondsans-medium', initialFamilyLoadedCallback );
+    loadFontGroup( 'edmondsans-medium' );
   }
   // load selected font
   selectFont( path.font, initialFamilyLoadedCallback );
@@ -389,6 +389,7 @@ var fontSizeSlider;
 
 $( function() {
   $body = $('body');
+  $body.addClass('is-transitions-enabled');
   $wrap = $('#wrap');
   $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
   $acquire = $('#acquire');
