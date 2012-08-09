@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-  padding-bottom: 200px;
+/*  padding-bottom: 200px;*/
 /*  min-height: 100%;*/
 }
 
@@ -116,13 +116,64 @@ a:hover { color: yellow; }
 #controls {
   background: #DA624E;
   position: absolute;
-  bottom: 0;
+  bottom: -200px;
   padding: 10px;
   left: 0;
   width: 100%;
   height: 200px;
   text-align: center;
 /*  border-top: 2px solid white;*/
+}
+
+.toggler {
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+
+.toggler a {
+  width: 50px;
+  height: 50px;
+  background: #DA624E;
+  display: block;
+  position: absolute;
+  bottom: -15px;
+  left: -25px;
+  border-radius: 50% 50% 0 0;
+}
+
+.toggler .pointer {
+  display: block;
+  position: absolute;
+  left: 18px;
+  top: 14px;
+  width: 15px;
+  height: 15px;
+  border-right: 3px solid white;
+  border-top:   3px solid white;
+  -webkit-transition: -webkit-transform 0.4s;
+     -moz-transition:    -moz-transform 0.4s;
+      -ms-transition:     -ms-transform 0.4s;
+       -o-transition:      -o-transform 0.4s;
+          transition:         transform 0.4s;
+  -webkit-transform: rotate(-45deg);
+     -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+       -o-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.is-controls-active .toggler .pointer {
+  -webkit-transform: rotate(135deg);
+     -moz-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+       -o-transform: rotate(135deg);
+          transform: rotate(135deg);
+
+}
+
+.toggler a:hover .pointer {
+  border-color: #222;
 }
 
 /* ----------------- font selection ----------------- */

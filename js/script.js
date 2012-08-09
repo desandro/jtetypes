@@ -208,7 +208,7 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   }
   console.log('WebFont should be ready');
   // load edmondsans family first
-  
+
   var family = familyFonts[ path.font ];
   if ( family !== 'initial' ) {
     loadFontGroup( 'edmondsans-medium' );
@@ -382,15 +382,38 @@ function mimicTextarea() {
   positionTextarea();
 }
 
+// -------------------------- positioning controls -------------------------- //
+
+var isControlsActive = false;
+
+function toggleControls( event ) {
+
+  isControlsActive = !isControlsActive;
+  var classMethod = isControlsActive ? 'addClass' : 'removeClass';
+  $body[ classMethod ]('is-controls-active')
+    .animate({
+      paddingBottom: isControlsActive ? 200 : 0
+    });
+
+  $controls.animate({
+    bottom: isControlsActive ? 0 : -200
+  }, {
+    step: positionTextarea
+  });
+
+  event.preventDefault();
+}
+
 // -------------------------- doc ready -------------------------- //
 
-var $fontSelection, $acquire, $dummyArea, $textareaWrap, $wrap;
+var $fontSelection, $acquire, $dummyArea, $textareaWrap, $wrap, $controls;
 var fontSizeSlider;
 
 $( function() {
   $body = $('body');
   $body.addClass('is-transitions-enabled');
   $wrap = $('#wrap');
+  $controls = $('#controls');
   $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
   $acquire = $('#acquire');
 
@@ -410,6 +433,8 @@ $( function() {
     slide: onSlidechange,
     change: onSlidechange
   });
+
+  $controls.find('.toggler a').on( 'click', toggleControls );
 
   // trigger hash change to capture initial settings
   $( window ).on( 'hashchange', onHashchange ).trigger('hashchange');
