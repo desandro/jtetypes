@@ -1,25 +1,35 @@
 @font-face{
   font-family: 'Duke';
-  src: url('../fonts/Duke.eot?') format('eot'), url('../fonts/Duke.otf') format('opentype');
+  src: url('../fonts/d.eot?') format('eot'),
+       url('../fonts/d.woff') format('woff'),
+       url('../fonts/d.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Edmondsans Medium';
-  src: url('../fonts/Edmondsans-Medium.eot?') format('eot'), url('../fonts/Edmondsans-Medium.otf') format('opentype');
+  src: url('../fonts/em.eot?') format('eot'),
+       url('../fonts/em.woff') format('woff'),
+       url('../fonts/em.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Lavanderia Regular';
-  src: url('../fonts/Lavanderia-Regular.eot?') format('eot'), url('../fonts/Lavanderia-Regular.otf') format('opentype');
+  src: url('../fonts/lr.eot?') format('eot'),
+       url('../fonts/lr.woff') format('woff'),
+       url('../fonts/lr.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Mission Script';
-  src: url('../fonts/Mission-Script.eot?') format('eot'), url('../fonts/Mission-Script.otf') format('opentype');
+  src: url('../fonts/ms.eot?') format('eot'),
+       url('../fonts/ms.woff') format('woff'),
+       url('../fonts/ms.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Wisdom Script';
-  src: url('../fonts/Wisdom-Script.eot?') format('eot'), url('../fonts/Wisdom-Script.otf') format('opentype');
+  src: url('../fonts/ws.eot?') format('eot'),
+       url('../fonts/ws.woff') format('woff'),
+       url('../fonts/ws.otf') format('opentype');
 }
 

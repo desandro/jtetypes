@@ -1,9 +1,13 @@
 @font-face{
   font-family: 'Edmondsans Regular';
-  src: url('../fonts/Edmondsans-Regular.eot?') format('eot'), url('../fonts/Edmondsans-Regular.otf') format('opentype');
+  src: url('../fonts/er.eot?') format('eot'),
+       url('../fonts/er.woff') format('woff'),
+       url('../fonts/er.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Edmondsans Bold';
-  src: url('../fonts/Edmondsans-Bold.eot?') format('eot'), url('../fonts/Edmondsans-Bold.otf') format('opentype');
+  src: url('../fonts/eb.eot?') format('eot'),
+       url('../fonts/eb.woff') format('woff'),
+       url('../fonts/eb.otf') format('opentype');
 }

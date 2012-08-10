@@ -1,9 +1,13 @@
 @font-face{
   font-family: 'Duke Fill';
-  src: url('../fonts/Duke-Fill.eot?') format('eot'), url('../fonts/Duke-Fill.otf') format('opentype');
+  src: url('../fonts/df.eot?') format('eot'),
+       url('../fonts/df.woff') format('woff'),
+       url('../fonts/df.otf') format('opentype');
 }
 
 @font-face{
   font-family: 'Duke Shadow';
-  src: url('../fonts/Duke-Shadow.eot?') format('eot'), url('../fonts/Duke-Shadow.otf') format('opentype');
+  src: url('../fonts/ds.eot?') format('eot'),
+       url('../fonts/ds.woff') format('woff'),
+       url('../fonts/ds.otf') format('opentype');
 }
