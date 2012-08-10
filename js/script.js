@@ -420,7 +420,7 @@ $( function() {
   $body.addClass('is-transitions-enabled');
   $wrap = $('#wrap');
   $controls = $('#controls');
-  $fontSelection = $('#font-selection').on( 'click', 'a', onFontSelectionClick );
+  $fontSelection = $('#font-selection').on( 'click', 'a.js-activate-font', onFontSelectionClick );
   $acquire = $('#acquire');
 
   $textareaWrap = $('#textarea-wrap');
