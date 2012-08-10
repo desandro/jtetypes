@@ -109,14 +109,20 @@ function onWebFontInactive( font, weight ) {
   console.log( font + ' font inactive' );
 }
 
+var activityOptions = {
+  length: 18,
+  space: 6,
+  width: 6
+};
+
 var loadFontGroup = function( font, callback ) {
   // don't proceed if WebFont isn't ready
-  $body.activity({
-  
-  });
   if ( !window.WebFont ) {
     return;
   }
+
+  $body.activity( activityOptions );
+
   // console.log( fontConfigs, family, fontConfigs[ family ] );
   // var group = siteFonts[ ]
   var group = siteFonts[ font ].group;
