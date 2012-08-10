@@ -1,6 +1,8 @@
 
 (function( global ) {
 
+'use strict';
+
 var siteData = {
   families: {
     duke: {

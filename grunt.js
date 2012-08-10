@@ -32,12 +32,15 @@ module.exports = function( grunt ) {
         forin: false,
         newcap: true,
         noempty: true,
+        smarttabs: true,
         strict: true,
         undef: true,
         browser: true
       },
       globals: {
-        Modernizr: false
+        Modernizr: false,
+        module: false,
+        jQuery: false
       }
     }
 

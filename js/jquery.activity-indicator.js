@@ -13,6 +13,8 @@
  */
 (function($) {
 
+'use strict';
+
 	$.fn.activity = function(opts) {
 		this.each(function() {
 			var $this = $(this);
@@ -29,8 +31,8 @@
 				var h = $this.outerHeight() - el.height();
 				var w = $this.outerWidth() - el.width();
 				var margin = {
-					top: opts.valign == 'top' ? opts.padding : opts.valign == 'bottom' ? h - opts.padding : Math.floor(h / 2),
-					left: opts.align == 'left' ? opts.padding : opts.align == 'right' ? w - opts.padding : Math.floor(w / 2)
+					top: opts.valign === 'top' ? opts.padding : opts.valign === 'bottom' ? h - opts.padding : Math.floor(h / 2),
+					left: opts.align === 'left' ? opts.padding : opts.align === 'right' ? w - opts.padding : Math.floor(w / 2)
 				};
 				var offset = $this.offset();
 				if (opts.outside) {
