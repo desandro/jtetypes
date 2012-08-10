@@ -110,7 +110,6 @@ var siteData = {
 
   scripts: [
     'js/modernizr.min.js',
-    'js/jquery.min.js',
     'js/jquery-ui-slider.min.js',
     'modules/jquery-bbq/jquery.ba-bbq.min.js',
     'js/jquery.activity-indicator.js',
