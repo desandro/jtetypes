@@ -10,6 +10,10 @@ build: index.html
 	make refresh
 	grunt build
 
+dev: index.html
+	make refresh
+	grunt build:dev
+
 deploy: _site
 	@echo 'Deploying to ${BERNA}'
 	@rsync -avz _site/ $$BERNA:~/www/work/jtetypes
