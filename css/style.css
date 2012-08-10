@@ -329,7 +329,7 @@ a:hover { color: yellow; }
 #font-size hr {
   display: block;
   border: none;
-  border-top: 1px solid;
+  border-top: 1px solid white;
   position: absolute;
   width: 100%;
   left: 0;
