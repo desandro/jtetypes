@@ -1,0 +1,6 @@
+.*
+modules/jquery-bbq/*/
+grunt.js
+Makefile
+notes.mdown
+rsync-excludes.txt
