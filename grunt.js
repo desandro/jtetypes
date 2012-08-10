@@ -46,11 +46,11 @@ module.exports = function( grunt ) {
 
   });
 
-  grunt.registerTask( 'mincatjs', 'Minifies and concats JS', function( arg1 ) {
+  function minCatJS() {
     var output = '';
     var timeStamp = grunt.template.today('yymmddhhmmss');
     // timestamp destination js file
-    var dest = '_site/js/scripts-all.' + timeStamp + '.js';
+    var dest = 'js/scripts-all.' + timeStamp + '.js';
 
     siteData.scripts.forEach( function( filePath, i ) {
       var file = grunt.file.read( filePath );
@@ -66,9 +66,12 @@ module.exports = function( grunt ) {
       output += "\n\n";
     });
 
-    grunt.file.write( dest, output );
+    grunt.file.write( '_site/' + dest, output );
     grunt.log.writeln( ( 'generated ' + dest ).cyan );
-  });
+    return dest;
+  }
+
+  grunt.registerTask( 'mincatjs', 'Minifies and concats JS', minCatJS );
 
   function getDevScripts() {
     // each script gets a tag
@@ -79,9 +82,8 @@ module.exports = function( grunt ) {
   }
 
   function getProductionScripts() {
-    grunt.task.run('mincatjs');
-    // get script
-    var scriptPath = grunt.file.expandFiles('_site/js/scripts-all*.js')[0];
+    var scriptPath = minCatJS();
+    // console.log( scriptPath );
     return '<script src="' + scriptPath + '"></script>';
   }
 
