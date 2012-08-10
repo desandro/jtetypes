@@ -131,7 +131,8 @@ var loadFontGroup = function( font, callback ) {
         callback();
       }
       console.log( group + ' font group active');
-      $body.activity( false )
+      $body.activity( false );
+      mimicTextarea();
     },
     inactive: function() {
       console.log( group + ' font group inactive');
@@ -372,7 +373,7 @@ function formatDummyText( text ) {
 }
 
 function positionTextarea() {
-  var h = $textareaWrap.height();
+  var h = $textareaWrap.innerHeight();
   var top = Math.max( 0, ( h - $dummyArea.innerHeight() ) * 0.5 );
   $theTextarea.css({
     paddingTop: top
