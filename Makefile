@@ -5,7 +5,7 @@ build: index.html
 	@echo copying files to _site/
 	@rm -rf ${build_dir}
 	@rsync -az --exclude=".*" --exclude="modules/jquery-bbq/*/" ./ ${build_dir}
-	grunt templates
+	grunt build
 
 deploy: _site
 	@echo 'Deploying to ${BERNA}'

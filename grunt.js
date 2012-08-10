@@ -95,9 +95,6 @@ module.exports = function( grunt ) {
     grunt.file.write( '_site/index.html', processed );
   });
 
-
-  grunt.registerTask( 'data', function() {
-    console.log( siteData );
-  });
+  grunt.registerTask( 'build', 'lint templates' );
 
 };
