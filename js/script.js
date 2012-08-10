@@ -111,6 +111,9 @@ function onWebFontInactive( font, weight ) {
 
 var loadFontGroup = function( font, callback ) {
   // don't proceed if WebFont isn't ready
+  $body.activity({
+  
+  });
   if ( !window.WebFont ) {
     return;
   }
@@ -128,9 +131,11 @@ var loadFontGroup = function( font, callback ) {
         callback();
       }
       console.log( group + ' font group active');
+      $body.activity( false )
     },
     inactive: function() {
       console.log( group + ' font group inactive');
+      $body.activity( false )
     },
     fontactive: onWebFontActive,
     fontinactive: onWebFontInactive

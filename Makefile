@@ -1,10 +1,13 @@
 
 build_dir=_site
 
-build: index.html
-	@echo copying files to _site/
+refresh:
 	@rm -rf ${build_dir}
 	@rsync -az --exclude=".*" --exclude="modules/jquery-bbq/*/" ./ ${build_dir}
+
+build: index.html
+	@echo copying files to _site/
+	make refresh
 	grunt build
 
 deploy: _site

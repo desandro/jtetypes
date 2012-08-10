@@ -67,7 +67,7 @@ module.exports = function( grunt ) {
     });
 
     grunt.file.write( dest, output );
-
+    grunt.log.writeln( ( 'generated ' + dest ).cyan );
   });
 
   function getDevScripts() {
@@ -82,7 +82,6 @@ module.exports = function( grunt ) {
     grunt.task.run('mincatjs');
     // get script
     var scriptPath = grunt.file.expandFiles('_site/js/scripts-all*.js')[0];
-    console.log( scriptPath );
     return '<script src="' + scriptPath + '"></script>';
   }
 
@@ -98,6 +97,9 @@ module.exports = function( grunt ) {
     grunt.file.write( '_site/index.html', processed );
   });
 
-  grunt.registerTask( 'build', 'lint templates' );
+  grunt.registerTask( 'build', function( arg1 ) {
+    var opt1 = arg1 ? ':' + arg1 : '';
+    grunt.task.run( 'lint templates' + opt1 );
+  });
 
 };
