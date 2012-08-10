@@ -54,17 +54,20 @@ module.exports = function( grunt ) {
 
     siteData.scripts.forEach( function( filePath, i ) {
       var file = grunt.file.read( filePath );
-      output  += '// ---- ' + filePath + ' ---- //\n\n';
-      if ( arg1 === 'full' || filePath.indexOf('.min.js') !== -1 ) {
+      output += '// ---- ' + filePath + ' ---- //';
+      output += "\n\n";
+      if ( filePath.indexOf('.min.js') !== -1 ) {
         // concat full file
         output += file;
       } else {
         // concat minified file
         output += grunt.helper( 'uglify', file );
       }
-      output += '\n\n';
-      grunt.file.write( dest, output );
+      output += "\n\n";
     });
+
+    grunt.file.write( dest, output );
+
   });
 
   function getDevScripts() {
