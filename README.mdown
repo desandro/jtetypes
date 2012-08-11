@@ -4,13 +4,13 @@
 
 Actually, this repo contains the source of your site, not your actual site.
 
-You can download this repo and build the site.
+You can [download this repo](https://github.com/desandro/jtetypes/downloads) and build the site.
 
 ### Terminal
 
 Bad news. You'll have to open up Terminal. Terminal is pretty gross, but it's a necessary evil.
 
-Let's say you download this site to your desktop. Un-zip the file, then rename the resulting folder to `jtetypes-site`.
+Let's say you [download this repo](https://github.com/desandro/jtetypes/downloads) to your desktop. Un-zip the file, then rename the resulting folder (which should be like `desandro-jtetypes-a1b2c3`) to `jtetypes-site`.
 
 Then we'll need to navigate to this folder in Terminal. Open up Terminal and type in:
 
