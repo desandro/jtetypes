@@ -5,3 +5,4 @@ Makefile
 notes.mdown
 rsync-excludes.txt
 node_modules/
+README.*
