@@ -16,9 +16,7 @@ var families = JTE.siteData.families;
 var $body, $theTextarea;
 // text, fontsize, font, style
 // defaults
-var path = {
-  font: 'edmondsans-medium'
-};
+var path = {};
 
 // helper function
 function capitalize( str ) {
@@ -150,8 +148,6 @@ function selectFont( font, callback ) {
   if ( !( font in siteFonts ) ) {
     return;
   }
-  // path.font = font;
-  // var family = fontFamilies[ font ];
 
   var onFontGroupLoaded = function() {
     activateFont( font );
@@ -196,11 +192,16 @@ function activateFont( font ) {
 
 }
 
-// window.loadFont = loadFont;
+var initialHash = location.hash;
 
 // var webFontsConfig
 var initialFamilyLoadedCallback = function() {
   $body.addClass('is-ready');
+  // show controls if there's no custom hash
+  if ( !path || !path.text ) {
+    isControlsActive = false;
+    toggleControls();
+  }
 };
 
 
@@ -213,15 +214,15 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   if ( readyState && readyState !== 'complete' && readyState !== 'loaded' ) {
     return;
   }
-  // console.log('WebFont should be ready');
   // load edmondsans family first
+  var initialFont = path.font || 'edmondsans-medium';
+  var group = siteFonts[ initialFont ].group;
 
-  var family = familyFonts[ path.font ];
-  if ( family !== 'initial' ) {
+  if ( group !== 'initial' ) {
     loadFontGroup( 'edmondsans-medium' );
   }
   // load selected font
-  selectFont( path.font, initialFamilyLoadedCallback );
+  selectFont( initialFont, initialFamilyLoadedCallback );
 };
 
 var firstScript = document.getElementsByTagName('script')[0];
@@ -250,11 +251,11 @@ function onTextareaChange( event ) {
 var isHashChanged;
 
 function onHashchange( event ) {
-  console.log( 'hashchange' );
+  // console.log( 'hashchange' );
   // reset
   isHashChanged = true;
   if ( !wasPushed ) {
-    var hashPath = getHashPath( location.hash );
+    getHashPath();
   }
   isHashChanged = false;
   wasPushed = false;
@@ -318,7 +319,8 @@ function decode( text ) {
 
 var rePathPrefix = /^[\w\-]+:/;
 
-function getHashPath( hash ) {
+function getHashPath() {
+  var hash = location.hash;
   var hashPath = {};
   var parts = hash.split('/');
   var textIsSet = false;
@@ -408,7 +410,9 @@ function toggleControls( event ) {
     step: positionTextarea
   });
 
-  event.preventDefault();
+  if ( event ) {
+    event.preventDefault();
+  }
 }
 
 // -------------------------- doc ready -------------------------- //
@@ -444,7 +448,8 @@ $( function() {
   $controls.find('.toggler a').on( 'click', toggleControls );
 
   // trigger hash change to capture initial settings
-  $( window ).on( 'hashchange', onHashchange ).trigger('hashchange');
+  getHashPath();
+  $( window ).on( 'hashchange', onHashchange );
 
 });
 
