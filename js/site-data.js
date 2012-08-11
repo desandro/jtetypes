@@ -4,6 +4,8 @@
 'use strict';
 
 var siteData = {
+
+  // families used for templating
   families: {
     duke: {
       title: 'Duke',

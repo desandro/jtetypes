@@ -1,0 +1,55 @@
+# James, this is your site.
+
+## Building the site
+
+Actually, this repo contains the source of your site, not your actual site.
+
+You can download this repo and build the site.
+
+### Terminal
+
+Bad news. You'll have to open up Terminal. Terminal is pretty gross, but it's a necessary evil.
+
+Let's say you download this site to your desktop. Un-zip the file, then rename the resulting folder to `jtetypes-site`.
+
+Then we'll need to navigate to this folder in Terminal. Open up Terminal and type in:
+
+```
+cd ~/Desktop/jteypes-site
+```
+
+From here, you can run the build task.
+
+### Node
+
+You'll need to install [Node JS](http://nodejs.org/). Easy enough.
+
+Install [grunt](https://github.com/cowboy/grunt). Do this from the Terminal. Doesn't matter where you are, it will put it in a safe place.
+
+``` bash
+npm install -g grunt
+```
+
+### Build task
+
+Anytime you edit a script or HTML file, you'll need to run the build task.
+
+To run the build task, navigate to the `jtetypes-site` folder you unzipped. Then type in Terminal:
+
+``` bash
+make build
+```
+
+This creates the site in `_site/`. That stuff you can FTP where-ever you like.
+
+## Site Data
+
+`js/site-data.js` is used in both building the site, and in the site's JS. In there you'll find the font families, used in templating, and the font configs, used for loading fonts.
+
+## Loading fonts
+
+Fonts are dynamically loaded with the [Google WebFont Loader](https://developers.google.com/webfonts/docs/webfont_loader) using the [`custom` module](https://developers.google.com/webfonts/docs/webfont_loader#Specifying).
+
+## Font files
+
+They're missing from this repo, but you should have 'em :)
