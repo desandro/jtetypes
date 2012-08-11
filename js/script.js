@@ -14,6 +14,7 @@ var fontConfigs = JTE.siteData.fontConfigs;
 var families = JTE.siteData.families;
 
 var $body, $theTextarea;
+var $window = $(window);
 // text, fontsize, font, style
 // defaults
 var path = {};
@@ -272,6 +273,10 @@ function onSlidechange( event, ui ) {
   debouncedPushIt();
 }
 
+var onDebouncedWindowResize = debounce( function() {
+  positionTextarea();
+}, 200 );
+
 
 
 // -------------------------- pushIt -------------------------- //
@@ -434,13 +439,13 @@ $( function() {
 
   $theTextarea.on( 'keyup change', onTextareaChange );
 
-  var initialFontSize = $theTextarea.css('font-size');
+  var initialFontSize = parseInt( $theTextarea.css('font-size'), 10 );
 
   // set up slider
   fontSizeSlider = $('#font-size').slider({
     min: 32,
     max: 320,
-    value: parseInt( initialFontSize, 10 ),
+    value: initialFontSize,
     slide: onSlidechange,
     change: onSlidechange
   });
@@ -449,7 +454,8 @@ $( function() {
 
   // trigger hash change to capture initial settings
   getHashPath();
-  $( window ).on( 'hashchange', onHashchange );
+  $window.on( 'hashchange', onHashchange )
+    .on( 'resize', onDebouncedWindowResize );
 
 });
 
