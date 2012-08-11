@@ -93,10 +93,6 @@ var familyFonts = {};
 
 })()
 
-// console.log( familyFonts );
-
-
-// window.fontConfigs = fontConfigs;
 
 // -------------------------- load font -------------------------- //
 
@@ -106,7 +102,7 @@ function onWebFontActive( font, weight ) {
 }
 
 function onWebFontInactive( font, weight ) {
-  console.log( font + ' font inactive' );
+  // console.log( font + ' font inactive' );
 }
 
 var activityOptions = {
@@ -124,7 +120,6 @@ var loadFontGroup = function( font, callback ) {
   $body.activity( activityOptions );
 
   // console.log( fontConfigs, family, fontConfigs[ family ] );
-  // var group = siteFonts[ ]
   var group = siteFonts[ font ].group;
   var fontConfig = fontConfigs[ group ];
 
@@ -136,12 +131,12 @@ var loadFontGroup = function( font, callback ) {
       if ( callback ) {
         callback();
       }
-      console.log( group + ' font group active');
+      // console.log( group + ' font group active');
       $body.activity( false );
       mimicTextarea();
     },
     inactive: function() {
-      console.log( group + ' font group inactive');
+      // console.log( group + ' font group inactive');
       $body.activity( false )
     },
     fontactive: onWebFontActive,
@@ -161,7 +156,7 @@ function selectFont( font, callback ) {
   var onFontGroupLoaded = function() {
     activateFont( font );
     if ( callback ) {
-      console.log('font group loaded, triggering callback');
+      // console.log('font group loaded, triggering callback');
       callback();
     }
   };
@@ -195,7 +190,7 @@ function activateFont( font ) {
   $fontSelection.find( '.family.' + family ).addClass('is-active-family');
   positionTextarea();
   activeFont = font;
-  console.log('activated ' + font );
+  // console.log('activated ' + font );
   path.font = font;
   pushIt();
 
@@ -218,7 +213,7 @@ webFontScript.onload = webFontScript.onreadystatechange = function() {
   if ( readyState && readyState !== 'complete' && readyState !== 'loaded' ) {
     return;
   }
-  console.log('WebFont should be ready');
+  // console.log('WebFont should be ready');
   // load edmondsans family first
 
   var family = familyFonts[ path.font ];

@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
       options: {
         asi: false,
         curly: true,
-        devel: true,
+        devel: false,
         eqeqeq: true,
         forin: false,
         newcap: true,
