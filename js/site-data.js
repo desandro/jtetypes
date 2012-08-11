@@ -109,6 +109,7 @@ var siteData = {
   },
 
   scripts: [
+    'js/header-comment.min.js',
     'js/modernizr.min.js',
     'js/jquery-ui-slider.min.js',
     'modules/jquery-bbq/jquery.ba-bbq.min.js',
