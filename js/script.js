@@ -13,7 +13,7 @@
 var fontConfigs = JTE.siteData.fontConfigs;
 var families = JTE.siteData.families;
 
-var $body, $theTextarea;
+var $body = $('body');
 var $window = $(window);
 // text, fontsize, font, style
 // defaults
@@ -422,11 +422,11 @@ function toggleControls( event ) {
 
 // -------------------------- doc ready -------------------------- //
 
-var $fontSelection, $acquire, $dummyArea, $textareaWrap, $wrap, $controls;
+var $theTextarea, $fontSelection, $acquire, $dummyArea, $textareaWrap, $wrap, $controls;
 var fontSizeSlider;
 
 $( function() {
-  $body = $('body');
+
   $body.addClass('is-transitions-enabled');
   $wrap = $('#wrap');
   $controls = $('#controls');
