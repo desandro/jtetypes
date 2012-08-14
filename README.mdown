@@ -27,7 +27,29 @@ You'll need to install [Node JS](http://nodejs.org/). Easy enough.
 Install [grunt](https://github.com/cowboy/grunt). Do this from the Terminal. Doesn't matter where you are, it will put it in a safe place.
 
 ``` bash
-npm install -g grunt
+sudo npm install -g grunt
+```
+
+### OS X Command Line Tools
+
+Unless you have XCode installed, you'll need to install OS X Command Line Tools. These are available at [developer.apple.com/downloads/index.action](https://developer.apple.com/downloads/index.action).
+
+Looks like you'll need to sign up for an Apple Developer to download this. Darnit.
+
+Okay we can do this.
+
++ On the login screen, click Register: **Join now**
++ Under the next page, _Which Developer Program is for you_, select the free option, **Safari Developer Program**, Individual Free
++ At this point you can enter in your current Apple ID, or create a new Apple ID. I suggest using your current Apple ID
++ There will probably be an email confirmation or some crap after that
+
+Once that is all done, you can download and install the Command Line Tools.
+
+After they are installed, create a new Terminal window and run
+
+``` bash
+make
+# make: *** No targets specified and no makefile found.  Stop.
 ```
 
 ### Build task
